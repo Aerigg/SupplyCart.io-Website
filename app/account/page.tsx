@@ -2,17 +2,24 @@
 
 import { useAuth } from '@/lib/auth-context'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { User, Building2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { User, Building2, ExternalLink, Settings, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/navbar'
 
 export default function Account() {
   const { user, loading } = useAuth()
   const router = useRouter()
+  const [isNewUser, setIsNewUser] = useState(true) // Später aus DB oder user_metadata holen
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login')
+    }
+    
+    // Simuliere Check ob User schon Setup gemacht hat
+    // In Realität würdest du das aus der DB oder user_metadata holen
+    if (user?.user_metadata?.app_setup_completed) {
+      setIsNewUser(false)
     }
   }, [user, loading, router])
 
@@ -37,67 +44,205 @@ export default function Account() {
 
       <main className="max-w-7xl mx-auto pt-20 py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* User Info Card */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-6">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <User className="h-8 w-8 text-gray-400" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Profil</h3>
-                    <p className="text-sm text-gray-500">{user.email}</p>
-                    {user.user_metadata?.company && (
-                      <p className="text-sm text-gray-500 flex items-center mt-1">
-                        <Building2 className="h-4 w-4 mr-1" />
-                        {user.user_metadata.company}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Subscription Info Card */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Aktueller Plan</h3>
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  Free Tier
-                </div>
-                <p className="text-sm text-gray-500 mt-2">
-                  Sie nutzen aktuell unser kostenloses Angebot.
+          
+          {isNewUser ? (
+            // Neuer User - Setup Wizard
+            <>
+              <div className="text-center mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  Willkommen bei SupplyCart! 🎉
+                </h1>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Lassen Sie uns gemeinsam Ihre Beschaffungsprozesse einrichten. 
+                  Klicken Sie auf den Button unten, um den Setup-Wizard zu starten.
                 </p>
+                <button 
+                  onClick={() => setIsNewUser(false)}
+                  className="mt-4 text-sm text-blue-600 hover:text-blue-500"
+                >
+                  Demo: Setup bereits abgeschlossen
+                </button>
               </div>
-            </div>
 
-            {/* Quick Actions Card */}
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Schnellaktionen</h3>
-                <div className="space-y-2">
-                  <button className="w-full text-left px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded">
-                    Upgrade auf Pro Plan
-                  </button>
-                  <button className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded">
-                    Profil bearbeiten
-                  </button>
+              {/* Setup Card */}
+              <div className="max-w-2xl mx-auto">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                  <div className="p-8">
+                    <div className="text-center mb-6">
+                      <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Settings className="h-8 w-8 text-primary-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        Setup-Wizard starten
+                      </h2>
+                      <p className="text-gray-600">
+                        In wenigen Schritten zu Ihrer persönlichen Beschaffungsplattform
+                      </p>
+                    </div>
+
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <span className="text-green-600 text-sm font-semibold">1</span>
+                        </div>
+                        <span className="text-gray-700">Mitarbeiter einladen</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <span className="text-green-600 text-sm font-semibold">2</span>
+                        </div>
+                        <span className="text-gray-700">Grundeinstellungen festlegen</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <span className="text-green-600 text-sm font-semibold">3</span>
+                        </div>
+                        <span className="text-gray-700">Erste Lieferanten und Artikel anlegen</span>
+                      </div>
+                    </div>
+
+                    <a
+                      href="https://app.supplycart.io/setup"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 transition font-semibold text-center flex items-center justify-center space-x-2"
+                    >
+                      <span>Setup-Wizard starten</span>
+                      <ArrowRight className="h-5 w-5" />
+                    </a>
+
+                    <p className="text-center text-sm text-gray-500 mt-4">
+                      Der Setup dauert nur 5-10 Minuten
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Welcome Message */}
-          <div className="mt-8 bg-blue-50 border border-blue-200 rounded-md p-6">
-            <h2 className="text-lg font-medium text-blue-900 mb-2">
-              Willkommen bei SupplyCart!
-            </h2>
-            <p className="text-blue-800">
-              Sie haben erfolgreich Ihr kostenloses Konto erstellt. Erkunden Sie unsere Funktionen 
-              oder upgraden Sie auf einen kostenpflichtigen Plan für erweiterte Features.
-            </p>
-          </div>
+              {/* User Info */}
+              <div className="mt-8 max-w-2xl mx-auto">
+                <div className="bg-white rounded-lg shadow p-6">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
+                      <User className="h-8 w-8 text-gray-400" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-medium text-gray-900">Ihr Profil</h3>
+                      <p className="text-sm text-gray-500">{user.email}</p>
+                      {user.user_metadata?.company && (
+                        <p className="text-sm text-gray-500 flex items-center mt-1">
+                          <Building2 className="h-4 w-4 mr-1" />
+                          {user.user_metadata.company}
+                        </p>
+                      )}
+                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 mt-2">
+                        Free Tier
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            // Bestehender User
+            <>
+              <div className="text-center mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  Willkommen zurück!
+                </h1>
+                <p className="text-lg text-gray-600">
+                  Ihr SupplyCart System ist eingerichtet und bereit für Sie.
+                </p>
+                <button 
+                  onClick={() => setIsNewUser(true)}
+                  className="mt-4 text-sm text-blue-600 hover:text-blue-500"
+                >
+                  Demo: Zurück zum Setup-Wizard
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* App Access Card */}
+                <div className="lg:col-span-2 bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          Zu SupplyCart wechseln
+                        </h3>
+                        <p className="text-gray-600 mb-4">
+                          Öffnen Sie Ihre Beschaffungsplattform und verwalten Sie Bestellungen, 
+                          Lagerbestände und Ihr Team.
+                        </p>
+                        <a
+                          href="https://app.supplycart.io"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 transition font-semibold space-x-2"
+                        >
+                          <span>SupplyCart öffnen</span>
+                          <ExternalLink className="h-5 w-5" />
+                        </a>
+                      </div>
+                      <div className="hidden md:block">
+                        <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center">
+                          <ExternalLink className="h-12 w-12 text-primary-600" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* User Info Card */}
+                <div className="bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-6">
+                    <div className="text-center">
+                      <div className="flex-shrink-0 mx-auto mb-4">
+                        <User className="h-12 w-12 text-gray-400 mx-auto" />
+                      </div>
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">Ihr Profil</h3>
+                      <p className="text-sm text-gray-500 mb-1">{user.email}</p>
+                      {user.user_metadata?.company && (
+                        <p className="text-sm text-gray-500 flex items-center justify-center mt-1">
+                          <Building2 className="h-4 w-4 mr-1" />
+                          {user.user_metadata.company}
+                        </p>
+                      )}
+                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 mt-3">
+                        Free Tier
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Actions Card */}
+                <div className="md:col-span-2 lg:col-span-3 bg-white overflow-hidden shadow rounded-lg">
+                  <div className="p-6">
+                    <h3 className="text-lg font-medium text-gray-900 mb-4">Schnellaktionen</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <button className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                        <div className="text-blue-600 font-medium">Upgrade auf Pro Plan</div>
+                        <div className="text-sm text-gray-500 mt-1">Erweiterte Features freischalten</div>
+                      </button>
+                      <button className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                        <div className="text-gray-700 font-medium">Profil bearbeiten</div>
+                        <div className="text-sm text-gray-500 mt-1">Persönliche Daten anpassen</div>
+                      </button>
+                      <a
+                        href="https://app.supplycart.io/help"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition block"
+                      >
+                        <div className="text-gray-700 font-medium">Hilfe & Support</div>
+                        <div className="text-sm text-gray-500 mt-1">Dokumentation und Support</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
         </div>
       </main>
     </div>

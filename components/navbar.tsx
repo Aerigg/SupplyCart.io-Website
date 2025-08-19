@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
-import { User, LogOut, Settings } from 'lucide-react'
+import { User, LogOut, Settings, ExternalLink } from 'lucide-react'
 
 export default function Navbar() {
   const { user, loading, signOut } = useAuth()
@@ -71,44 +71,56 @@ export default function Navbar() {
             {loading ? (
               <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
             ) : user ? (
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center space-x-2 focus:outline-none"
+              <>
+                <a
+                  href="https://app.supplycart.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition"
                 >
-                  <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {getInitials(user)}
-                  </div>
-                </button>
+                  <span>Zu SupplyCart</span>
+                  <ExternalLink className="h-4 w-4" />
+                </a>
                 
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-200">
-                    <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
-                      <div className="font-medium">
-                        {user.user_metadata?.first_name} {user.user_metadata?.last_name}
-                      </div>
-                      <div className="text-gray-500">{user.email}</div>
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center space-x-2 focus:outline-none"
+                  >
+                    <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                      {getInitials(user)}
                     </div>
-                    
-                    <Link
-                      href="/account"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Account
-                    </Link>
-                    
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Abmelden
-                    </button>
-                  </div>
-                )}
-              </div>
+                  </button>
+                  
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                      <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                        <div className="font-medium">
+                          {user.user_metadata?.first_name} {user.user_metadata?.last_name}
+                        </div>
+                        <div className="text-gray-500">{user.email}</div>
+                      </div>
+                      
+                      <a
+                        href="/account"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        <Settings className="h-4 w-4 mr-2" />
+                        Account
+                      </a>
+                      
+                      <button
+                        onClick={handleSignOut}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Abmelden
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
             ) : (
               <div className="flex items-center space-x-4">
                 <Link 
@@ -149,14 +161,25 @@ export default function Navbar() {
                       <div className="text-gray-500">{user.email}</div>
                     </div>
                     
-                    <Link
+                    <a
+                      href="https://app.supplycart.io"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Zu SupplyCart
+                    </a>
+                    
+                    <a
                       href="/account"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setDropdownOpen(false)}
                     >
                       <Settings className="h-4 w-4 mr-2" />
                       Account
-                    </Link>
+                    </a>
                     
                     <button
                       onClick={handleSignOut}
