@@ -46,7 +46,7 @@ export default function Datenschutz() {
             <p>
               <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />
               Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten 
-              können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle" in dieser Datenschutzerklärung entnehmen.
+              können Sie dem Abschnitt &bdquo;Hinweis zur Verantwortlichen Stelle&ldquo; in dieser Datenschutzerklärung entnehmen.
             </p>
 
             <p>
@@ -111,7 +111,7 @@ export default function Datenschutz() {
             
             <h3 className="text-xl font-semibold text-navy-900 mt-6 mb-3">Cookies</h3>
             <p>
-              Unsere Internetseiten verwenden sogenannte „Cookies". Cookies sind kleine Datenpakete und richten auf 
+              Unsere Internetseiten verwenden sogenannte &bdquo;Cookies&ldquo;. Cookies sind kleine Datenpakete und richten auf 
               Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung 
               (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert. Session-Cookies 
               werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät 

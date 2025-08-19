@@ -35,10 +35,10 @@ export default function AGB() {
           <div className="prose prose-lg max-w-none text-navy-600">
             <h2 className="text-2xl font-semibold text-navy-900 mt-8 mb-4">§ 1 Geltungsbereich</h2>
             <p>
-              (1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") gelten für alle Verträge über die 
-              Nutzung der Software-as-a-Service-Lösung "SupplyCart.io" (nachfolgend "Software"), die zwischen 
-              EMIT Solution, Eric Menge, Ottmannshausen 68, 99439 Am Ettersberg (nachfolgend "Anbieter") und 
-              dem Kunden (nachfolgend "Kunde") geschlossen werden.
+              (1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend &quot;AGB&quot;) gelten für alle Verträge über die 
+              Nutzung der Software-as-a-Service-Lösung &quot;SupplyCart.io&quot; (nachfolgend &quot;Software&quot;), die zwischen 
+              EMIT Solution, Eric Menge, Ottmannshausen 68, 99439 Am Ettersberg (nachfolgend &quot;Anbieter&quot;) und 
+              dem Kunden (nachfolgend &quot;Kunde&quot;) geschlossen werden.
             </p>
             <p>
               (2) Geschäftsbedingungen des Kunden finden keine Anwendung, auch wenn der Anbieter ihrer Geltung 
