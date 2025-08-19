@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
+import { getSupabaseClient } from '@/lib/supabase'
 import { User, LogOut, Settings, ExternalLink } from 'lucide-react'
 
 export default function Navbar() {
@@ -24,6 +25,32 @@ export default function Navbar() {
       return user.email.substring(0, 2).toUpperCase()
     }
     return 'U'
+  }
+
+  const getAppUrlWithAuth = async (path: string = '') => {
+    if (!user) return 'https://app.supplycart.io'
+    
+    try {
+      const supabase = getSupabaseClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session?.access_token) {
+        const baseUrl = 'https://app.supplycart.io'
+        const url = new URL(path ? `${baseUrl}${path}` : baseUrl)
+        url.searchParams.set('token', session.access_token)
+        url.searchParams.set('refresh_token', session.refresh_token || '')
+        return url.toString()
+      }
+    } catch (error) {
+      console.error('Error getting session for app URL:', error)
+    }
+    
+    return 'https://app.supplycart.io'
+  }
+
+  const handleAppRedirect = async (path: string = '') => {
+    const url = await getAppUrlWithAuth(path)
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   // Close dropdown when clicking outside
@@ -72,15 +99,13 @@ export default function Navbar() {
               <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
             ) : user ? (
               <>
-                <a
-                  href="https://app.supplycart.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => handleAppRedirect()}
                   className="flex items-center space-x-1 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition"
                 >
                   <span>Zu SupplyCart</span>
                   <ExternalLink className="h-4 w-4" />
-                </a>
+                </button>
                 
                 <div className="relative" ref={dropdownRef}>
                   <button
@@ -161,16 +186,16 @@ export default function Navbar() {
                       <div className="text-gray-500">{user.email}</div>
                     </div>
                     
-                    <a
-                      href="https://app.supplycart.io"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={() => setDropdownOpen(false)}
+                    <button
+                      onClick={() => {
+                        setDropdownOpen(false)
+                        handleAppRedirect()
+                      }}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Zu SupplyCart
-                    </a>
+                    </button>
                     
                     <a
                       href="/account"

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { User, Building2, ExternalLink, Settings, ArrowRight } from 'lucide-react'
 import Navbar from '@/components/navbar'
+import { getSupabaseClient } from '@/lib/supabase'
 
 export default function Account() {
   const { user, loading } = useAuth()
@@ -22,6 +23,32 @@ export default function Account() {
       setIsNewUser(false)
     }
   }, [user, loading, router])
+
+  const getAppUrlWithAuth = async (path: string = '') => {
+    if (!user) return 'https://app.supplycart.io'
+    
+    try {
+      const supabase = getSupabaseClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      
+      if (session?.access_token) {
+        const baseUrl = 'https://app.supplycart.io'
+        const url = new URL(path ? `${baseUrl}${path}` : baseUrl)
+        url.searchParams.set('token', session.access_token)
+        url.searchParams.set('refresh_token', session.refresh_token || '')
+        return url.toString()
+      }
+    } catch (error) {
+      console.error('Error getting session for app URL:', error)
+    }
+    
+    return 'https://app.supplycart.io'
+  }
+
+  const handleAppRedirect = async (path: string = '') => {
+    const url = await getAppUrlWithAuth(path)
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
 
   if (loading) {
     return (
@@ -101,15 +128,13 @@ export default function Account() {
                       </div>
                     </div>
 
-                    <a
-                      href="https://app.supplycart.io/setup"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => handleAppRedirect('/setup')}
                       className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 transition font-semibold text-center flex items-center justify-center space-x-2"
                     >
                       <span>Setup-Wizard starten</span>
                       <ArrowRight className="h-5 w-5" />
-                    </a>
+                    </button>
 
                     <p className="text-center text-sm text-gray-500 mt-4">
                       Der Setup dauert nur 5-10 Minuten
@@ -173,15 +198,13 @@ export default function Account() {
                           Öffnen Sie Ihre Beschaffungsplattform und verwalten Sie Bestellungen, 
                           Lagerbestände und Ihr Team.
                         </p>
-                        <a
-                          href="https://app.supplycart.io"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={() => handleAppRedirect()}
                           className="inline-flex items-center bg-primary-600 text-white py-3 px-6 rounded-lg hover:bg-primary-700 transition font-semibold space-x-2"
                         >
                           <span>SupplyCart öffnen</span>
                           <ExternalLink className="h-5 w-5" />
-                        </a>
+                        </button>
                       </div>
                       <div className="hidden md:block">
                         <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center">
@@ -227,15 +250,13 @@ export default function Account() {
                         <div className="text-gray-700 font-medium">Profil bearbeiten</div>
                         <div className="text-sm text-gray-500 mt-1">Persönliche Daten anpassen</div>
                       </button>
-                      <a
-                        href="https://app.supplycart.io/help"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition block"
+                      <button
+                        onClick={() => handleAppRedirect('/help')}
+                        className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition w-full"
                       >
                         <div className="text-gray-700 font-medium">Hilfe & Support</div>
                         <div className="text-sm text-gray-500 mt-1">Dokumentation und Support</div>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
