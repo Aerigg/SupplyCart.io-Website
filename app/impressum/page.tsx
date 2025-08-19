@@ -44,7 +44,6 @@ export default function Impressum() {
 
             <h2 className="text-2xl font-semibold text-navy-900 mt-8 mb-4">Kontakt</h2>
             <p>
-              Telefon: +49 36452 140003<br />
               E-Mail: info@emit-solution.com
             </p>
 

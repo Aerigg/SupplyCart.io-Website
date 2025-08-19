@@ -80,7 +80,6 @@ export default function Datenschutz() {
               Ottmannshausen 68<br />
               99439 Am Ettersberg<br />
               Deutschland<br /><br />
-              Telefon: +49 36452 140003<br />
               E-Mail: info@emit-solution.com
             </p>
 

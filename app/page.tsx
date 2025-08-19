@@ -325,7 +325,7 @@ export default function Home() {
               <h3 className="font-semibold mb-4">Unternehmen</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="/about" className="hover:text-white transition">Über uns</Link></li>
-                <li><Link href="/kontakt" className="hover:text-white transition">Kontakt</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition">Kontakt</Link></li>
                 <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
               </ul>
             </div>

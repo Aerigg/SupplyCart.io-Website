@@ -56,7 +56,7 @@ export default function Blog() {
               <Link href="/about" className="text-gray-700 hover:text-primary-600 transition">
                 Über uns
               </Link>
-              <Link href="/kontakt" className="text-gray-700 hover:text-primary-600 transition">
+              <Link href="/contact" className="text-gray-700 hover:text-primary-600 transition">
                 Kontakt
               </Link>
               <Link 
@@ -152,7 +152,7 @@ export default function Blog() {
               Möchten Sie informiert werden, sobald neue Artikel verfügbar sind?
             </p>
             <Link 
-              href="/kontakt"
+              href="/contact"
               className="inline-block bg-navy-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-navy-800 transition"
             >
               Kontakt aufnehmen

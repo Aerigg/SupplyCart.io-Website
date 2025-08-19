@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 
-export default function Kontakt() {
+export default function Contact() {
   return (
     <main className="min-h-screen">
       {/* Navigation */}
@@ -76,24 +76,6 @@ export default function Kontakt() {
                       className="text-primary-600 hover:text-primary-700 font-medium"
                     >
                       info@emit-solution.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 p-3 rounded-lg">
-                    <Phone className="h-6 w-6 text-primary-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-navy-900 mb-1">Telefon</h3>
-                    <p className="text-navy-600 mb-2">
-                      Montag bis Freitag, 9:00 - 17:00 Uhr
-                    </p>
-                    <a 
-                      href="tel:+4936452140003" 
-                      className="text-primary-600 hover:text-primary-700 font-medium"
-                    >
-                      +49 36452 140003
                     </a>
                   </div>
                 </div>
