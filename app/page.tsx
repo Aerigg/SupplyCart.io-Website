@@ -52,7 +52,7 @@ export default function Home() {
             </h1>
             <p className="text-xl text-navy-600 mb-8 max-w-3xl mx-auto">
               SupplyCart macht interne Bestellungen und Lagerverwaltung so einfach wie Online-Shopping. 
-              Schluss mit Excel-Listen, E-Mail-Chaos und Zuruf über den Flur – für Labore, Werkstätten und Büros.
+              Schluss mit Excel-Listen, E-Mail-Chaos und Zuruf über den Flur – für Unternehmen jeder Größe.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
@@ -165,7 +165,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
-              Für jedes Labor, jede Werkstatt, jedes Büro
+              Für Unternehmen jeder Größe
             </h2>
             <p className="text-lg text-navy-600 max-w-2xl mx-auto">
               Kostenlos starten – von kleinen Teams bis zu großen Organisationen
@@ -179,7 +179,7 @@ export default function Home() {
                 <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Beliebt</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Free</h3>
-              <p className="text-navy-600 mb-4">Kleinste Teams & Start-ups</p>
+              <p className="text-navy-600 mb-4">Kleine Teams & Start-ups</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">0 €</span>
                 <span className="text-navy-600">/Monat</span>
@@ -200,7 +200,7 @@ export default function Home() {
             {/* Professional Plan */}
             <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Professional</h3>
-              <p className="text-navy-600 mb-4">Wachsende Labore & Werkstätten</p>
+              <p className="text-navy-600 mb-4">Wachsende Unternehmen</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">79 €</span>
                 <span className="text-navy-600">/Monat</span>
@@ -225,7 +225,7 @@ export default function Home() {
                 <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Empfohlen</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Business</h3>
-              <p className="text-navy-600 mb-4">Etablierte Unternehmen & Büros</p>
+              <p className="text-navy-600 mb-4">Etablierte Unternehmen</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">199 €</span>
                 <span className="text-navy-600">/Monat</span>
