@@ -46,11 +46,11 @@ export default function Home() {
       <section className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-navy-900 mb-6">
               Revolutionieren Sie Ihre
-              <span className="text-primary-600 block mt-2">Bestell- und Lagerverwaltung</span>
+              <span className="text-primary-500 block mt-2">Bestell- und Lagerverwaltung</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-navy-600 mb-8 max-w-3xl mx-auto">
               SupplyCart.io ist die moderne All-in-One Lösung für effizientes Supply Chain Management. 
               Automatisieren Sie Bestellprozesse, optimieren Sie Lagerbestände und steigern Sie Ihre Produktivität.
             </p>
@@ -76,10 +76,10 @@ export default function Home() {
       <section id="features" className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
               Leistungsstarke Features für Ihr Business
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-navy-600 max-w-2xl mx-auto">
               Entdecken Sie die Funktionen, die SupplyCart.io zur ersten Wahl für moderne Unternehmen machen
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Intelligente Bestellverwaltung</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Automatisierte Bestellvorschläge basierend auf historischen Daten und aktuellen Lagerbeständen
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Echtzeit-Lagerübersicht</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Behalten Sie Ihre Lagerbestände in Echtzeit im Blick und vermeiden Sie Engpässe
               </p>
             </div>
@@ -116,7 +116,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Detaillierte Analytics</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Umfassende Berichte und Dashboards für datengestützte Entscheidungen
               </p>
             </div>
@@ -128,7 +128,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Höchste Sicherheit</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Enterprise-Grade Sicherheit mit Ende-zu-Ende Verschlüsselung und regelmäßigen Backups
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Blitzschnelle Performance</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Optimiert für Geschwindigkeit mit modernster Technologie und Cloud-Infrastruktur
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Team-Kollaboration</h3>
-              <p className="text-gray-600">
+              <p className="text-navy-600">
                 Nahtlose Zusammenarbeit mit Rollen-basiertem Zugriff und Echtzeit-Updates
               </p>
             </div>
@@ -164,10 +164,10 @@ export default function Home() {
       <section id="preise" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
               Transparente Preise für jede Unternehmensgröße
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-navy-600 max-w-2xl mx-auto">
               Starten Sie kostenlos und wachsen Sie mit unseren flexiblen Tarifen
             </p>
           </div>
@@ -179,10 +179,10 @@ export default function Home() {
                 <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Beliebt</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Free</h3>
-              <p className="text-gray-600 mb-4">Startups & Kleinst-Teams</p>
+              <p className="text-navy-600 mb-4">Startups & Kleinst-Teams</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">0 €</span>
-                <span className="text-gray-600">/Monat</span>
+                <span className="text-navy-600">/Monat</span>
               </div>
               <ul className="space-y-3 mb-6 text-sm">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 3 Benutzer</li>
@@ -190,7 +190,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Abteilung</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Lagerort</li>
                 <li className="flex items-center"><span className="text-gray-400 mr-2">✗</span>Freigabe-Workflows</li>
-                <li className="text-xs text-gray-500">&quot;Powered by SupplyCart&quot; Branding</li>
+                <li className="text-xs text-navy-500">&quot;Powered by SupplyCart&quot; Branding</li>
               </ul>
               <Link href="/register" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
                 Kostenlos starten
@@ -200,10 +200,10 @@ export default function Home() {
             {/* Professional Plan */}
             <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
               <h3 className="text-xl font-bold mb-2">Professional</h3>
-              <p className="text-gray-600 mb-4">Wachsende KMUs</p>
+              <p className="text-navy-600 mb-4">Wachsende KMUs</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">79 €</span>
-                <span className="text-gray-600">/Monat</span>
+                <span className="text-navy-600">/Monat</span>
               </div>
               <ul className="space-y-3 mb-6 text-sm">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 10 Benutzer</li>
@@ -212,7 +212,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 5 Lagerorte</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Einfache Freigaben</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Standard Reports</li>
-                <li className="text-xs text-gray-500">Eigenes Logo + &quot;Powered by&quot; Vermerk</li>
+                <li className="text-xs text-navy-500">Eigenes Logo + &quot;Powered by&quot; Vermerk</li>
               </ul>
               <Link href="/register?plan=professional" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center">
                 Plan wählen
@@ -225,10 +225,10 @@ export default function Home() {
                 <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Empfohlen</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Business</h3>
-              <p className="text-gray-600 mb-4">Etablierte Unternehmen</p>
+              <p className="text-navy-600 mb-4">Etablierte Unternehmen</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">199 €</span>
-                <span className="text-gray-600">/Monat</span>
+                <span className="text-navy-600">/Monat</span>
               </div>
               <ul className="space-y-3 mb-6 text-sm">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 30 Benutzer</li>
@@ -238,7 +238,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Mehrstufige Freigaben</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Daueraufträge</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Erweiterte Reports</li>
-                <li className="text-xs text-gray-500">Vollständig markenfrei</li>
+                <li className="text-xs text-navy-500">Vollständig markenfrei</li>
               </ul>
               <Link href="/register?plan=business" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
                 Plan wählen
@@ -248,7 +248,7 @@ export default function Home() {
             {/* Enterprise Plan */}
             <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
               <h3 className="text-xl font-bold mb-2">Enterprise</h3>
-              <p className="text-gray-600 mb-4">Große Organisationen</p>
+              <p className="text-navy-600 mb-4">Große Organisationen</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">Auf Anfrage</span>
               </div>
@@ -269,10 +269,10 @@ export default function Home() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-4">
+            <p className="text-navy-600 mb-4">
               Alle Pläne beinhalten: SSL-Verschlüsselung, automatische Backups, 99.9% Uptime-Garantie
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-navy-500">
               Preise zzgl. MwSt. Jederzeit kündbar. 30 Tage Geld-zurück-Garantie.
             </p>
           </div>
@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-navy-900 text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div>

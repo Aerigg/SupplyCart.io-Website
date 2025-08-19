@@ -1,14 +1,24 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   title: 'SupplyCart.io - Modernes Bestell- und Lagerverwaltungssystem',
   description: 'Optimieren Sie Ihre Bestell- und Lagerprozesse mit SupplyCart.io - Die All-in-One Lösung für effizientes Supply Chain Management',
   keywords: 'Lagerverwaltung, Bestellsystem, Supply Chain, Inventar Management, B2B Software',
   authors: [{ name: 'SupplyCart.io' }],
+  icons: {
+    icon: '/images/favicon.ico',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
   openGraph: {
     title: 'SupplyCart.io - Modernes Bestell- und Lagerverwaltungssystem',
     description: 'Optimieren Sie Ihre Bestell- und Lagerprozesse mit SupplyCart.io',
@@ -22,7 +32,6 @@ export const metadata: Metadata = {
     title: 'SupplyCart.io',
     description: 'Modernes Bestell- und Lagerverwaltungssystem',
   },
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
 }
 
