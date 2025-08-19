@@ -1,6 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+let supabase: any = null
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export function getSupabaseClient() {
+  if (!supabase) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
+    supabase = createClient(supabaseUrl, supabaseAnonKey)
+  }
+  return supabase
+}
+
+export { getSupabaseClient as supabase }

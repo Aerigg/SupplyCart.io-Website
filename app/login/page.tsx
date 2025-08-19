@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import { Eye, EyeOff } from 'lucide-react'
 
 export default function Login() {
@@ -21,6 +21,7 @@ export default function Login() {
     setLoading(true)
 
     try {
+      const supabase = getSupabaseClient()
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password
@@ -29,7 +30,7 @@ export default function Login() {
       if (error) {
         setError('Ungültige E-Mail-Adresse oder Passwort')
       } else {
-        router.push('/dashboard')
+        router.push('/account')
       }
     } catch (err) {
       setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.')

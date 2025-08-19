@@ -1,43 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Navbar from '@/components/navbar'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Image
-                src="/images/sc-logo.png"
-                alt="SupplyCart.io Logo"
-                width={150}
-                height={40}
-                className="h-8 w-auto"
-                priority
-              />
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="#features" className="text-gray-700 hover:text-primary-600 transition">
-                Features
-              </Link>
-              <Link href="#vorteile" className="text-gray-700 hover:text-primary-600 transition">
-                Vorteile
-              </Link>
-              <Link href="#preise" className="text-gray-700 hover:text-primary-600 transition">
-                Preise
-              </Link>
-              <Link 
-                href="#preise" 
-                className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition"
-              >
-                Jetzt kostenlos starten
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-50 to-white">

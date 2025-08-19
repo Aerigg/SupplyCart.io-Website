@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import { Eye, EyeOff } from 'lucide-react'
 
 export default function Register() {
@@ -38,6 +38,7 @@ export default function Register() {
     }
 
     try {
+      const supabase = getSupabaseClient()
       const { data, error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
@@ -47,7 +48,8 @@ export default function Register() {
             last_name: formData.lastName,
             company: formData.company,
             subscription_plan: 'free'
-          }
+          },
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/account`
         }
       })
 
