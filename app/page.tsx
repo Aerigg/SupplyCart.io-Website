@@ -32,10 +32,10 @@ export default function Home() {
                 Kontakt
               </Link>
               <Link 
-                href="/demo" 
+                href="#preise" 
                 className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition"
               >
-                Demo anfordern
+                Jetzt kostenlos starten
               </Link>
             </div>
           </div>
@@ -56,10 +56,10 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
-                href="/demo"
+                href="#preise"
                 className="bg-primary-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary-700 transition shadow-lg"
               >
-                Kostenlose Demo starten
+                Jetzt kostenlos starten
               </Link>
               <Link 
                 href="#features"
@@ -160,6 +160,125 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="preise" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Transparente Preise für jede Unternehmensgröße
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Starten Sie kostenlos und wachsen Sie mit unseren flexiblen Tarifen
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Free Plan */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Beliebt</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Free</h3>
+              <p className="text-gray-600 mb-4">Startups & Kleinst-Teams</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold">0 €</span>
+                <span className="text-gray-600">/Monat</span>
+              </div>
+              <ul className="space-y-3 mb-6 text-sm">
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 3 Benutzer</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>20 Bestellungen/Monat</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Abteilung</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Lagerort</li>
+                <li className="flex items-center"><span className="text-gray-400 mr-2">✗</span>Freigabe-Workflows</li>
+                <li className="text-xs text-gray-500">&quot;Powered by SupplyCart&quot; Branding</li>
+              </ul>
+              <Link href="/register" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
+                Kostenlos starten
+              </Link>
+            </div>
+
+            {/* Professional Plan */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
+              <h3 className="text-xl font-bold mb-2">Professional</h3>
+              <p className="text-gray-600 mb-4">Wachsende KMUs</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold">79 €</span>
+                <span className="text-gray-600">/Monat</span>
+              </div>
+              <ul className="space-y-3 mb-6 text-sm">
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 10 Benutzer</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Bestellungen</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 5 Abteilungen</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 5 Lagerorte</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Einfache Freigaben</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Standard Reports</li>
+                <li className="text-xs text-gray-500">Eigenes Logo + &quot;Powered by&quot; Vermerk</li>
+              </ul>
+              <Link href="/register?plan=professional" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center">
+                Plan wählen
+              </Link>
+            </div>
+
+            {/* Business Plan */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-primary-200 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Empfohlen</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Business</h3>
+              <p className="text-gray-600 mb-4">Etablierte Unternehmen</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold">199 €</span>
+                <span className="text-gray-600">/Monat</span>
+              </div>
+              <ul className="space-y-3 mb-6 text-sm">
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 30 Benutzer</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Bestellungen</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Abteilungen</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Lagerorte</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Mehrstufige Freigaben</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Daueraufträge</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Erweiterte Reports</li>
+                <li className="text-xs text-gray-500">Vollständig markenfrei</li>
+              </ul>
+              <Link href="/register?plan=business" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
+                Plan wählen
+              </Link>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
+              <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+              <p className="text-gray-600 mb-4">Große Organisationen</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold">Auf Anfrage</span>
+              </div>
+              <ul className="space-y-3 mb-6 text-sm">
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Benutzer</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Komplexe Freigaberegeln</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Individuelle Dashboards</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Vollständiges Whitelabel</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Eigene E-Mail-Domain</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>SSO-Integration</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>API-Zugriff</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>On-Premise Option</li>
+              </ul>
+              <Link href="/kontakt" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center">
+                Kontakt aufnehmen
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-gray-600 mb-4">
+              Alle Pläne beinhalten: SSL-Verschlüsselung, automatische Backups, 99.9% Uptime-Garantie
+            </p>
+            <p className="text-sm text-gray-500">
+              Preise zzgl. MwSt. Jederzeit kündbar. 30 Tage Geld-zurück-Garantie.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-600">
         <div className="max-w-4xl mx-auto text-center">
@@ -170,10 +289,10 @@ export default function Home() {
             Starten Sie noch heute mit SupplyCart.io und erleben Sie die Zukunft der Lagerverwaltung
           </p>
           <Link 
-            href="/demo"
+            href="#preise"
             className="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition shadow-lg"
           >
-            Jetzt kostenlos testen
+            Jetzt kostenlos starten
           </Link>
         </div>
       </section>
@@ -199,7 +318,7 @@ export default function Home() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="#features" className="hover:text-white transition">Features</Link></li>
                 <li><Link href="#preise" className="hover:text-white transition">Preise</Link></li>
-                <li><Link href="/demo" className="hover:text-white transition">Demo</Link></li>
+                <li><Link href="#preise" className="hover:text-white transition">Kostenlos starten</Link></li>
               </ul>
             </div>
             <div>
