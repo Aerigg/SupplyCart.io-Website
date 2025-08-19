@@ -580,7 +580,7 @@ export default function Home() {
               </button>
               <div className="faq-answer hidden pt-4" id="faq-5">
                 <p className="text-navy-600">
-                  Ja, wirklich! Bis zu 5 Nutzer und 500 Artikel sind dauerhaft kostenlos. Keine versteckten Kosten, keine Kreditkarte erforderlich. Sie zahlen nur, wenn Sie mehr Nutzer oder Artikel benötigen.
+                  Ja, wirklich! Bis zu 3 Benutzer und 20 Bestellungen pro Monat sind dauerhaft kostenlos. Keine versteckten Kosten, keine Kreditkarte erforderlich. Sie zahlen nur, wenn Sie mehr Benutzer oder Bestellungen benötigen.
                 </p>
               </div>
             </div>
@@ -594,7 +594,7 @@ export default function Home() {
               </button>
               <div className="faq-answer hidden pt-4" id="faq-6">
                 <p className="text-navy-600">
-                  Ja, Sie können jederzeit mit einem Klick kündigen. Keine Mindestlaufzeit, keine Kündigungsfristen. Ihre Daten können Sie vor der Kündigung vollständig exportieren.
+                  Ja, Sie können jederzeit mit einem Klick kündigen. Keine Mindestlaufzeit, keine Kündigungsfristen.
                 </p>
               </div>
             </div>
