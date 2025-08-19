@@ -174,7 +174,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Free Plan */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200 relative">
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-green-200 relative flex flex-col">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Beliebt</span>
               </div>
@@ -184,7 +184,7 @@ export default function Home() {
                 <span className="text-3xl font-bold">0 €</span>
                 <span className="text-navy-600">/Monat</span>
               </div>
-              <ul className="space-y-3 mb-6 text-sm">
+              <ul className="space-y-3 mb-6 text-sm flex-grow">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 3 Benutzer</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>20 Bestellungen/Monat</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Abteilung</li>
@@ -192,20 +192,20 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-gray-400 mr-2">✗</span>Freigabe-Workflows</li>
                 <li className="text-xs text-navy-500">&quot;Powered by SupplyCart&quot; Branding</li>
               </ul>
-              <Link href="/register" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
+              <Link href="/register" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center mt-auto">
                 Kostenlos starten
               </Link>
             </div>
 
             {/* Professional Plan */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Professional</h3>
               <p className="text-navy-600 mb-4">Wachsende KMUs</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">79 €</span>
                 <span className="text-navy-600">/Monat</span>
               </div>
-              <ul className="space-y-3 mb-6 text-sm">
+              <ul className="space-y-3 mb-6 text-sm flex-grow">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 10 Benutzer</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Bestellungen</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 5 Abteilungen</li>
@@ -214,13 +214,13 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Standard Reports</li>
                 <li className="text-xs text-navy-500">Eigenes Logo + &quot;Powered by&quot; Vermerk</li>
               </ul>
-              <Link href="/register?plan=professional" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center">
+              <Link href="/register?plan=professional" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center mt-auto">
                 Plan wählen
               </Link>
             </div>
 
             {/* Business Plan */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-primary-200 relative">
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-primary-200 relative flex flex-col">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Empfohlen</span>
               </div>
@@ -230,7 +230,7 @@ export default function Home() {
                 <span className="text-3xl font-bold">199 €</span>
                 <span className="text-navy-600">/Monat</span>
               </div>
-              <ul className="space-y-3 mb-6 text-sm">
+              <ul className="space-y-3 mb-6 text-sm flex-grow">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 30 Benutzer</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Bestellungen</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Abteilungen</li>
@@ -240,19 +240,19 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Erweiterte Reports</li>
                 <li className="text-xs text-navy-500">Vollständig markenfrei</li>
               </ul>
-              <Link href="/register?plan=business" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center">
+              <Link href="/register?plan=business" className="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition font-semibold inline-block text-center mt-auto">
                 Plan wählen
               </Link>
             </div>
 
             {/* Enterprise Plan */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200">
+            <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Enterprise</h3>
               <p className="text-navy-600 mb-4">Große Organisationen</p>
               <div className="mb-6">
                 <span className="text-3xl font-bold">Auf Anfrage</span>
               </div>
-              <ul className="space-y-3 mb-6 text-sm">
+              <ul className="space-y-3 mb-6 text-sm flex-grow">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Unbegrenzte Benutzer</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Komplexe Freigaberegeln</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Individuelle Dashboards</li>
@@ -262,7 +262,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>API-Zugriff</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>On-Premise Option</li>
               </ul>
-              <Link href="/kontakt" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center">
+              <Link href="/kontakt" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center mt-auto">
                 Kontakt aufnehmen
               </Link>
             </div>
@@ -273,7 +273,7 @@ export default function Home() {
               Alle Pläne beinhalten: SSL-Verschlüsselung, automatische Backups, 99.9% Uptime-Garantie
             </p>
             <p className="text-sm text-navy-500">
-              Preise zzgl. MwSt. Jederzeit kündbar. 30 Tage Geld-zurück-Garantie.
+              Preise zzgl. MwSt. Jederzeit kündbar.
             </p>
           </div>
         </div>
