@@ -19,15 +19,15 @@ export default function Contact() {
                 priority
               />
             </Link>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
               <Link href="/#features" className="text-gray-700 hover:text-primary-600 transition">
                 Features
               </Link>
+              <Link href="/#vorteile" className="text-gray-700 hover:text-primary-600 transition">
+                Vorteile
+              </Link>
               <Link href="/#preise" className="text-gray-700 hover:text-primary-600 transition">
                 Preise
-              </Link>
-              <Link href="/about" className="text-gray-700 hover:text-primary-600 transition">
-                Über uns
               </Link>
               <Link 
                 href="/#preise"
@@ -236,6 +236,53 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-navy-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <Image
+                src="/images/sc-logo.png"
+                alt="SupplyCart.io"
+                width={120}
+                height={32}
+                className="h-8 w-auto mb-4 brightness-0 invert"
+              />
+              <p className="text-gray-400">
+                Interne Beschaffung so einfach wie Online-Shopping
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Produkt</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/#features" className="hover:text-white transition">Features</Link></li>
+                <li><Link href="/#preise" className="hover:text-white transition">Preise</Link></li>
+                <li><Link href="/#preise" className="hover:text-white transition">Kostenlos starten</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Unternehmen</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/about" className="hover:text-white transition">Über uns</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition">Kontakt</Link></li>
+                <li><Link href="/blog" className="hover:text-white transition">Blog</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Rechtliches</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/datenschutz" className="hover:text-white transition">Datenschutz</Link></li>
+                <li><Link href="/impressum" className="hover:text-white transition">Impressum</Link></li>
+                <li><Link href="/agb" className="hover:text-white transition">AGB</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 SupplyCart.io. Alle Rechte vorbehalten.</p>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }

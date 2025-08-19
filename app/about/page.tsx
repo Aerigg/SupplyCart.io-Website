@@ -18,15 +18,15 @@ export default function About() {
                 priority
               />
             </Link>
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
               <Link href="/#features" className="text-gray-700 hover:text-primary-600 transition">
                 Features
               </Link>
+              <Link href="/#vorteile" className="text-gray-700 hover:text-primary-600 transition">
+                Vorteile
+              </Link>
               <Link href="/#preise" className="text-gray-700 hover:text-primary-600 transition">
                 Preise
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-primary-600 transition">
-                Kontakt
               </Link>
               <Link 
                 href="/#preise"

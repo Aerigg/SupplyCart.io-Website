@@ -28,9 +28,6 @@ export default function Home() {
               <Link href="#preise" className="text-gray-700 hover:text-primary-600 transition">
                 Preise
               </Link>
-              <Link href="#kontakt" className="text-gray-700 hover:text-primary-600 transition">
-                Kontakt
-              </Link>
               <Link 
                 href="#preise" 
                 className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition"
