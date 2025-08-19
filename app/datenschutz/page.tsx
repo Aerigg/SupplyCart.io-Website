@@ -171,7 +171,7 @@ export default function Datenschutz() {
             </p>
 
             <p className="mt-6 text-sm text-navy-500">
-              Stand: Januar 2025
+              Stand: August 2025
             </p>
           </div>
         </div>

@@ -184,7 +184,7 @@ export default function AGB() {
             </p>
 
             <p className="mt-8 text-sm text-navy-500">
-              Stand: Januar 2025<br />
+              Stand: August 2025<br />
               EMIT Solution<br />
               Eric Menge<br />
               Ottmannshausen 68<br />
