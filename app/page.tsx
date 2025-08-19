@@ -74,83 +74,309 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
-              Drei einfache Bereiche – ein klarer Prozess
+              Drei Module – eine Lösung
             </h2>
             <p className="text-lg text-navy-600 max-w-2xl mx-auto">
-              Von chaotischen Excel-Listen zu professioneller interner Beschaffung in wenigen Minuten
+              Entdecken Sie die drei Kernbereiche von SupplyCart.io
+            </p>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center mb-8 border-b border-gray-200">
+            <button 
+              className="tab-button active px-6 py-3 text-lg font-medium border-b-2 transition-colors"
+              data-tab="bestellportal"
+            >
+              Bestellportal
+            </button>
+            <button 
+              className="tab-button px-6 py-3 text-lg font-medium border-b-2 transition-colors"
+              data-tab="lager"
+            >
+              Lager & Wareneingang
+            </button>
+            <button 
+              className="tab-button px-6 py-3 text-lg font-medium border-b-2 transition-colors"
+              data-tab="verwaltung"
+            >
+              Verwaltungsportal
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="tab-content-container">
+            {/* Bestellportal Tab */}
+            <div className="tab-content active" id="bestellportal-content">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-2xl font-bold text-navy-900 mb-6">Bestellportal für Mitarbeiter</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Shop-ähnliche Benutzeroberfläche</h4>
+                        <p className="text-navy-600">Intuitiv wie Amazon – Artikel suchen, vergleichen und bestellen</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Warenkorb & Bestellanfragen</h4>
+                        <p className="text-navy-600">Mehrere Artikel sammeln und mit einem Klick anfragen</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Bestellstatus verfolgen</h4>
+                        <p className="text-navy-600">Transparente Verfolgung vom Antrag bis zur Lieferung</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
+                  <p className="text-gray-500 text-lg">Screenshot kommt hier</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Lager & Wareneingang Tab */}
+            <div className="tab-content hidden" id="lager-content">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-2xl font-bold text-navy-900 mb-6">Lager & Wareneingang</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Zentrale Bestandsübersicht</h4>
+                        <p className="text-navy-600">Alle Lagerbestände auf einen Blick – immer aktuell</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Tablet-optimierte Entnahme</h4>
+                        <p className="text-navy-600">Einfache Buchung von Entnahmen direkt am Lager</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Automatischer Wareneingang</h4>
+                        <p className="text-navy-600">Gelieferte Waren einfach einbuchen und verteilen</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
+                  <p className="text-gray-500 text-lg">Screenshot kommt hier</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Verwaltungsportal Tab */}
+            <div className="tab-content hidden" id="verwaltung-content">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-2xl font-bold text-navy-900 mb-6">Verwaltungsportal</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Lieferanten- & Artikelverwaltung</h4>
+                        <p className="text-navy-600">Zentrale Pflege aller Lieferanten und Produktkataloge</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Freigabe-Workflows</h4>
+                        <p className="text-navy-600">Flexible Genehmigungsprozesse je nach Betrag und Kategorie</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mt-1">
+                        <svg className="w-3 h-3 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-navy-900">Kosten & Reporting</h4>
+                        <p className="text-navy-600">Detaillierte Auswertungen und Budgetüberwachung</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
+                  <p className="text-gray-500 text-lg">Screenshot kommt hier</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* JavaScript for Tabs */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+              button.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => {
+                  btn.classList.remove('active', 'border-primary-600', 'text-primary-600');
+                  btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active', 'border-primary-600', 'text-primary-600');
+                this.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                  content.classList.add('hidden');
+                  content.classList.remove('active');
+                });
+                
+                // Show target tab content
+                const targetContent = document.getElementById(targetTab + '-content');
+                if (targetContent) {
+                  targetContent.classList.remove('hidden');
+                  targetContent.classList.add('active');
+                }
+              });
+            });
+            
+            // Set initial state
+            const firstButton = tabButtons[0];
+            if (firstButton) {
+              firstButton.classList.add('border-primary-600', 'text-primary-600');
+              firstButton.classList.remove('border-transparent', 'text-gray-500');
+            }
+          });
+        `
+      }} />
+
+      {/* Vorteile Section */}
+      <section id="vorteile" className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
+              Warum SupplyCart.io?
+            </h2>
+            <p className="text-lg text-navy-600 max-w-2xl mx-auto">
+              Die Vorteile, die Ihr Unternehmen sofort spüren wird
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Bestellportal für Mitarbeiter</h3>
-              <p className="text-navy-600">
-                Shop-ähnliche Oberfläche: Artikel finden, in den Warenkorb legen, Bestellanfrage stellen – einfacher geht&apos;s nicht
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Lagerportal für Teams</h3>
-              <p className="text-navy-600">
-                Zentrale Bestandsübersicht mit einfacher Tablet-Ansicht für Entnahmen und interne Umlagerungen
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Management-Portal für Admins</h3>
-              <p className="text-navy-600">
-                Die Kommandozentrale: Lieferanten pflegen, Freigaben erteilen, Kosten analysieren – volle Kontrolle
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Einfachheit</h3>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Einfachheit</h3>
               <p className="text-navy-600">
                 So einfach wie Amazon: Hohe Akzeptanz bei Mitarbeitern, minimaler Schulungsaufwand
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Klarheit</h3>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Transparenz</h3>
               <p className="text-navy-600">
-                100% Transparenz: Jeder weiß jederzeit, was bestellt wurde, was auf Lager ist und was im Zulauf ist
+                100% Klarheit: Jeder weiß jederzeit, was bestellt wurde, was auf Lager ist und was im Zulauf ist
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Kontrolle</h3>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Kontrolle</h3>
               <p className="text-navy-600">
-                Volle Kontrolle über Ausgaben und Bestände durch smarte Freigabe-Workflows und übersichtliche Auswertungen
+                Volle Kontrolle über Ausgaben und Bestände durch smarte Freigabe-Workflows und detaillierte Auswertungen
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Geschwindigkeit</h3>
+              <p className="text-navy-600">
+                Drastisch verkürzte Bestellzeiten: Von der Anfrage bis zur Lieferung – alles läuft schneller und reibungsloser
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Zeitersparnis</h3>
+              <p className="text-navy-600">
+                Massive Effizienzsteigerung: Inventuren könnten der Vergangenheit angehören – das System weiß immer, was wo ist
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-navy-900">Digitalisierung</h3>
+              <p className="text-navy-600">
+                Moderner Arbeitsplatz: Schluss mit Excel-Chaos und Papierkram – willkommen in der digitalen Zukunft
               </p>
             </div>
           </div>
@@ -259,7 +485,7 @@ export default function Home() {
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>API-Zugriff</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>On-Premise Option</li>
               </ul>
-              <Link href="/kontakt" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center mt-auto">
+              <Link href="/contact" className="w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition font-semibold inline-block text-center mt-auto">
                 Kontakt aufnehmen
               </Link>
             </div>
@@ -275,6 +501,154 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-navy-900 mb-4">
+              Häufig gestellte Fragen
+            </h2>
+            <p className="text-lg text-navy-600">
+              Alles was Sie über SupplyCart.io wissen müssen
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-1">
+                <h3 className="text-lg font-semibold text-navy-900">Wie schnell kann ich mit SupplyCart.io starten?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-1">
+                <p className="text-navy-600">
+                  Sie können sofort starten! Registrieren Sie sich kostenlos, laden Sie Ihr Team ein und beginnen Sie mit dem Anlegen Ihrer ersten Artikel. Die meisten Unternehmen sind innerhalb einer Stunde einsatzbereit.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-2">
+                <h3 className="text-lg font-semibold text-navy-900">Brauche ich technisches Know-how für die Einrichtung?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-2">
+                <p className="text-navy-600">
+                  Nein, überhaupt nicht! SupplyCart.io ist so einfach zu bedienen wie ein Online-Shop. Wir haben bewusst auf komplizierte Einstellungen verzichtet. Falls Sie doch Hilfe benötigen, steht Ihnen unser Support gerne zur Verfügung.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-3">
+                <h3 className="text-lg font-semibold text-navy-900">Kann ich meine bestehenden Lieferanten weiter nutzen?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-3">
+                <p className="text-navy-600">
+                  Ja, auf jeden Fall! SupplyCart.io ersetzt nicht Ihre Lieferanten, sondern organisiert nur Ihre internen Prozesse. Sie können alle Ihre bewährten Lieferantenbeziehungen beibehalten und einfach über das System verwalten.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-4">
+                <h3 className="text-lg font-semibold text-navy-900">Was passiert mit meinen Daten?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-4">
+                <p className="text-navy-600">
+                  Ihre Daten sind sicher! Wir hosten in Deutschland, verschlüsseln alle Daten und erstellen täglich Backups. Sie behalten jederzeit die volle Kontrolle über Ihre Daten und können diese jederzeit exportieren.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-5">
+                <h3 className="text-lg font-semibold text-navy-900">Ist der Free Plan wirklich kostenlos?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-5">
+                <p className="text-navy-600">
+                  Ja, wirklich! Bis zu 5 Nutzer und 500 Artikel sind dauerhaft kostenlos. Keine versteckten Kosten, keine Kreditkarte erforderlich. Sie zahlen nur, wenn Sie mehr Nutzer oder Artikel benötigen.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-item bg-white rounded-xl shadow-lg p-6">
+              <button className="faq-question w-full text-left flex justify-between items-center py-2" data-target="faq-6">
+                <h3 className="text-lg font-semibold text-navy-900">Kann ich jederzeit kündigen?</h3>
+                <svg className="faq-icon w-6 h-6 text-primary-600 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="faq-answer hidden pt-4" id="faq-6">
+                <p className="text-navy-600">
+                  Ja, Sie können jederzeit mit einem Klick kündigen. Keine Mindestlaufzeit, keine Kündigungsfristen. Ihre Daten können Sie vor der Kündigung vollständig exportieren.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-navy-600 mb-6">
+              Weitere Fragen? Wir helfen gerne weiter!
+            </p>
+            <Link 
+              href="/contact"
+              className="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition"
+            >
+              Kontakt aufnehmen
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ JavaScript */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+              question.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const answer = document.getElementById(targetId);
+                const icon = this.querySelector('.faq-icon');
+                
+                // Toggle the answer
+                if (answer.classList.contains('hidden')) {
+                  // Close all other answers
+                  document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+                    otherAnswer.classList.add('hidden');
+                  });
+                  document.querySelectorAll('.faq-icon').forEach(otherIcon => {
+                    otherIcon.classList.remove('rotate-180');
+                  });
+                  
+                  // Open this answer
+                  answer.classList.remove('hidden');
+                  icon.classList.add('rotate-180');
+                } else {
+                  // Close this answer
+                  answer.classList.add('hidden');
+                  icon.classList.remove('rotate-180');
+                }
+              });
+            });
+          });
+        `
+      }} />
 
       {/* CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-600">
