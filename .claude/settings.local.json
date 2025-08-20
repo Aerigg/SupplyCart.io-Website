@@ -11,10 +11,14 @@
       "Bash(git commit:*)",
       "Bash(mv:*)",
       "mcp__supabase__list_tables",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "E:\\Cursor Projekte\\SaaS Projekte\\SupplyCart.io"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [

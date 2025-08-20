@@ -1,0 +1,190 @@
+# Session-Sharing Implementation für app.supplycart.io
+
+## Kontext
+Die Website supplycart.io leitet authentifizierte Benutzer zu app.supplycart.io weiter und übergibt dabei Supabase Auth-Token als URL-Parameter, damit sich Benutzer nicht erneut anmelden müssen.
+
+## Bereits implementiert in supplycart.io
+- `handleAppRedirect` Funktion in `navbar.tsx` und `app/account/page.tsx`
+- URL-Parameter werden angehängt: `?token=ACCESS_TOKEN&refresh_token=REFRESH_TOKEN`
+
+## Zu implementieren in app.supplycart.io
+
+### 1. **Token-Handler Component erstellen**
+Erstelle eine neue Datei `components/AuthTokenHandler.tsx`:
+
+```typescript
+'use client'
+
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+
+export default function AuthTokenHandler() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
+
+  useEffect(() => {
+    const handleTokenAuth = async () => {
+      // URL-Parameter lesen
+      const urlParams = new URLSearchParams(window.location.search)
+      const token = urlParams.get('token')
+      const refreshToken = urlParams.get('refresh_token')
+
+      if (token && refreshToken) {
+        try {
+          // Session mit den übergebenen Tokens setzen
+          const { error } = await supabase.auth.setSession({
+            access_token: token,
+            refresh_token: refreshToken
+          })
+
+          if (!error) {
+            // Bei Erfolg: URL-Parameter entfernen für saubere URL
+            const cleanUrl = window.location.pathname + window.location.hash
+            window.history.replaceState({}, '', cleanUrl)
+            
+            // Optional: Zur Dashboard-Seite weiterleiten
+            router.push('/dashboard')
+          } else {
+            console.error('Fehler beim Setzen der Session:', error)
+          }
+        } catch (error) {
+          console.error('Fehler bei der Token-Authentifizierung:', error)
+        }
+      }
+    }
+
+    handleTokenAuth()
+  }, [router, supabase])
+
+  return null // Komponente rendert nichts
+}
+```
+
+### 2. **Integration in app/layout.tsx**
+Füge den AuthTokenHandler in die Haupt-Layout-Datei ein:
+
+```typescript
+import AuthTokenHandler from '@/components/AuthTokenHandler'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html>
+      <body>
+        <AuthTokenHandler />
+        {/* Bestehende Provider und Components */}
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+### 3. **Alternative: Integration in bestehenden Auth-Provider**
+Falls bereits ein AuthProvider existiert, integriere die Logik dort:
+
+```typescript
+// In lib/auth-context.tsx oder ähnlich
+useEffect(() => {
+  const initAuth = async () => {
+    // Bestehende Auth-Logik...
+    
+    // Token aus URL prüfen
+    const urlParams = new URLSearchParams(window.location.search)
+    const token = urlParams.get('token')
+    const refreshToken = urlParams.get('refresh_token')
+    
+    if (token && refreshToken && !user) {
+      const { error } = await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: refreshToken
+      })
+      
+      if (!error) {
+        // URL bereinigen
+        const cleanUrl = window.location.pathname + window.location.hash
+        window.history.replaceState({}, '', cleanUrl)
+      }
+    }
+  }
+  
+  initAuth()
+}, [])
+```
+
+### 4. **Sicherheitsüberlegungen**
+- Tokens sollten nur einmal verwendet werden
+- Nach erfolgreicher Anmeldung sofort aus URL entfernen
+- Optional: Token-Gültigkeit prüfen bevor Session gesetzt wird
+- HTTPS ist zwingend erforderlich
+
+### 5. **Testing**
+Nach Implementation teste:
+1. Login auf supplycart.io
+2. Klick auf "Zu SupplyCart" Button
+3. Automatische Anmeldung auf app.supplycart.io sollte erfolgen
+4. URL sollte keine Token-Parameter mehr enthalten
+5. User sollte angemeldet sein
+
+### 6. **Dependencies prüfen**
+Stelle sicher, dass installiert ist:
+```bash
+npm install @supabase/auth-helpers-nextjs @supabase/supabase-js
+```
+
+### 7. **Git Commit**
+Nach erfolgreicher Implementation:
+```bash
+git add .
+git commit -m "Implement cross-domain session sharing from supplycart.io"
+git push
+```
+
+## Wichtige Dateien zum Prüfen/Anpassen
+- `app/layout.tsx` - Hauptlayout für Token-Handler
+- `lib/supabase.ts` oder ähnlich - Supabase Client Konfiguration  
+- `components/AuthProvider.tsx` falls vorhanden - Bestehende Auth-Logik
+- `middleware.ts` - Falls Middleware-basierte Auth verwendet wird
+
+## Notizen zur bestehenden Implementation in supplycart.io
+
+### navbar.tsx (Zeilen 30-54)
+```typescript
+const getAppUrlWithAuth = async (path: string = '') => {
+  if (!user) return 'https://app.supplycart.io'
+  
+  try {
+    const supabase = getSupabaseClient()
+    const { data: { session } } = await supabase.auth.getSession()
+    
+    if (session?.access_token) {
+      const baseUrl = 'https://app.supplycart.io'
+      const url = new URL(path ? `${baseUrl}${path}` : baseUrl)
+      url.searchParams.set('token', session.access_token)
+      url.searchParams.set('refresh_token', session.refresh_token || '')
+      return url.toString()
+    }
+  } catch (error) {
+    console.error('Error getting session for app URL:', error)
+  }
+  
+  return 'https://app.supplycart.io'
+}
+
+const handleAppRedirect = async (path: string = '') => {
+  const url = await getAppUrlWithAuth(path)
+  window.open(url, '_blank', 'noopener,noreferrer')
+}
+```
+
+### account/page.tsx (gleiche Funktionen)
+Die gleichen Funktionen sind auch in der Account-Seite implementiert für:
+- Setup-Wizard Button (Zeile 132)
+- SupplyCart öffnen Button (Zeile 204) 
+- Hilfe & Support Button (Zeile 258)
+
+Diese rufen alle `handleAppRedirect()` mit verschiedenen Pfaden auf.

@@ -49,7 +49,7 @@ export default function Register() {
             company: formData.company,
             subscription_plan: 'free'
           },
-          emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/account`
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/auth/setup-account`
         }
       })
 
