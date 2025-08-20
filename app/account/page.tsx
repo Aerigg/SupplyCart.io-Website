@@ -10,19 +10,64 @@ import { getSupabaseClient } from '@/lib/supabase'
 export default function Account() {
   const { user, loading } = useAuth()
   const router = useRouter()
-  const [isNewUser, setIsNewUser] = useState(true) // Später aus DB oder user_metadata holen
+  const [isNewUser, setIsNewUser] = useState(false)
+  const [profile, setProfile] = useState<any>(null)
+  const [loadingProfile, setLoadingProfile] = useState(true)
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login')
+      return
     }
-    
-    // Simuliere Check ob User schon Setup gemacht hat
-    // In Realität würdest du das aus der DB oder user_metadata holen
-    if (user?.user_metadata?.app_setup_completed) {
-      setIsNewUser(false)
+
+    if (user) {
+      loadProfile()
     }
   }, [user, loading, router])
+
+  const loadProfile = async () => {
+    try {
+      const supabase = getSupabaseClient()
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select(`
+          *,
+          user_roles!fk_profiles_user_role_id(
+            name,
+            can_access_management
+          ),
+          organizations(
+            name,
+            slug
+          )
+        `)
+        .eq('id', user?.id)
+        .single()
+
+      if (profileData) {
+        setProfile(profileData)
+        
+        // Only company admins can see setup wizard
+        const isAdmin = profileData.role === 'company_admin' || profileData.user_roles?.can_access_management
+        const setupCompleted = user?.user_metadata?.app_setup_completed || profileData.organizations?.settings?.setup_completed
+        
+        if (isAdmin && !setupCompleted) {
+          setIsNewUser(true)
+        } else {
+          setIsNewUser(false)
+        }
+
+        // Non-admins should go to the app
+        if (!isAdmin) {
+          window.location.href = 'https://app.supplycart.io'
+        }
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error)
+    } finally {
+      setLoadingProfile(false)
+    }
+  }
 
   const getAppUrlWithAuth = async (path: string = '') => {
     if (!user) return 'https://app.supplycart.io'
@@ -50,7 +95,7 @@ export default function Account() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  if (loading) {
+  if (loading || loadingProfile) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">

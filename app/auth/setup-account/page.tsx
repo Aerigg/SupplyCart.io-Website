@@ -36,6 +36,17 @@ export default function SetupAccountPage() {
           return
         }
 
+        // Check if this is an invited user who needs to set password
+        // Invited users have user_metadata.invited_at but no password set
+        const isInvitedUser = session.user.user_metadata?.invited_at || session.user.app_metadata?.provider === 'email'
+        const needsPasswordSetup = session.user.user_metadata?.needs_password_setup !== false
+        
+        if (isInvitedUser && needsPasswordSetup) {
+          // Redirect to set-password page
+          router.push('/auth/set-password')
+          return
+        }
+
         // Get user profile from database
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
