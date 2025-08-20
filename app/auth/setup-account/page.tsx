@@ -14,14 +14,16 @@ export default function SetupAccountPage() {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        // Check if we have a code parameter - if so, redirect to callback handler first
+        // Check if we have URL parameters (token_hash, type, etc.)
         const urlParams = new URLSearchParams(window.location.search)
-        const code = urlParams.get('code')
+        const tokenHash = urlParams.get('token_hash')
+        const type = urlParams.get('type')
         
-        if (code) {
-          // Redirect to callback handler which will handle the code exchange
-          window.location.href = `/auth/callback?code=${code}`
-          return
+        // If this looks like a Supabase invite confirmation, let Supabase handle it
+        if (tokenHash && type === 'invite') {
+          // Supabase will automatically handle the invite confirmation
+          // Just wait for the auth state to update
+          console.log('Processing Supabase invite confirmation...')
         }
         
         // Get the current session (should exist if we came from callback)
