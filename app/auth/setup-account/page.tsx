@@ -41,7 +41,7 @@ export default function SetupAccountPage() {
           .from('profiles')
           .select(`
             *,
-            user_roles!inner(
+            user_roles!fk_profiles_user_role_id(
               name,
               can_access_management
             ),
