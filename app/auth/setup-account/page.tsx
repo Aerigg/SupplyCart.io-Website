@@ -14,6 +14,22 @@ export default function SetupAccountPage() {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
+        // Check if we have a code parameter (email confirmation)
+        const urlParams = new URLSearchParams(window.location.search)
+        const code = urlParams.get('code')
+        
+        if (code) {
+          // Exchange code for session
+          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+          
+          if (exchangeError) {
+            console.error('Code exchange error:', exchangeError)
+            setError('Fehler bei der E-Mail-Bestätigung. Bitte versuchen Sie es erneut.')
+            setLoading(false)
+            return
+          }
+        }
+        
         // Get the current session
         const { data: { session }, error: sessionError } = await supabase.auth.getSession()
         
