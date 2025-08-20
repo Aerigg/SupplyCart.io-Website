@@ -203,7 +203,13 @@ export default function SetPasswordPage() {
                 <p><strong>E-Mail:</strong> {user.email}</p>
                 <p><strong>Name:</strong> {profile.full_name || user.user_metadata?.full_name}</p>
                 <p><strong>Organisation:</strong> {profile.organizations?.name}</p>
-                <p><strong>Rolle:</strong> {profile.user_roles?.name || profile.role}</p>
+                <p><strong>Rolle:</strong> {
+                  profile.user_roles?.display_name || 
+                  profile.user_roles?.name || 
+                  (profile.role === 'orderer' ? 'Besteller' : 
+                   profile.role === 'company_admin' ? 'Verwalter' : 
+                   profile.role)
+                }</p>
               </div>
             </div>
           )}
