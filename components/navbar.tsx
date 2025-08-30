@@ -71,7 +71,12 @@ export default function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as HTMLElement
+      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
+        // Don't close if clicking on account link
+        if (target.closest('[data-account-link]')) {
+          return
+        }
         setDropdownOpen(false)
       }
     }
@@ -143,13 +148,18 @@ export default function Navbar() {
                         </div>
                       </div>
                       
-                      <button
-                        onClick={handleAccountClick}
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
+                      <a
+                        href="/account"
+                        data-account-link
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left no-underline"
+                        onClick={(e) => {
+                          console.log('Account link clicked')
+                          setDropdownOpen(false)
+                        }}
                       >
                         <Settings className="h-4 w-4 mr-2" />
                         Account
-                      </button>
+                      </a>
                       
                       <button
                         onClick={handleSignOut}
