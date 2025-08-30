@@ -77,15 +77,6 @@ export default function Navbar() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  // Check for auth tokens in URL on page load (from app subdomain)
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('token') && urlParams.get('refresh_token')) {
-      console.log('Found auth tokens in URL, triggering auth sync...')
-      // Force re-initialization of auth context
-      window.location.reload()
-    }
-  }, [])
 
   // Close mobile dropdown when clicking outside
   useEffect(() => {
