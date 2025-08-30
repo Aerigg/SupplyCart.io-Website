@@ -73,11 +73,10 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
       if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        // Don't close if clicking on account link
-        if (target.closest('[data-account-link]')) {
-          return
-        }
-        setDropdownOpen(false)
+        // Add delay to allow button clicks to complete
+        setTimeout(() => {
+          setDropdownOpen(false)
+        }, 0)
       }
     }
 
@@ -162,8 +161,8 @@ export default function Navbar() {
                       </a>
                       
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation()
+                        onClick={() => {
+                          console.log('Desktop Abmelden clicked')
                           handleSignOut()
                         }}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -245,8 +244,8 @@ export default function Navbar() {
                     </button>
                     
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation()
+                      onClick={() => {
+                        console.log('Mobile Abmelden clicked')
                         handleSignOut()
                       }}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
