@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseClient } from '@/lib/supabase'
 import { User, LogOut, Settings, ExternalLink } from 'lucide-react'
@@ -11,6 +12,7 @@ export default function Navbar() {
   const { user, loading, signOut } = useAuth()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   const handleSignOut = async () => {
     await signOut()
@@ -128,16 +130,16 @@ export default function Navbar() {
                         </div>
                       </div>
                       
-                      <Link
-                        href="/account"
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={(e) => {
+                      <button
+                        onClick={() => {
                           setDropdownOpen(false)
+                          router.push('/account')
                         }}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
                       >
                         <Settings className="h-4 w-4 mr-2" />
                         Account
-                      </Link>
+                      </button>
                       
                       <button
                         onClick={handleSignOut}
@@ -203,16 +205,16 @@ export default function Navbar() {
                       Zu SupplyCart
                     </button>
                     
-                    <Link
-                      href="/account"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      onClick={(e) => {
+                    <button
+                      onClick={() => {
                         setDropdownOpen(false)
+                        router.push('/account')
                       }}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
                     >
                       <Settings className="h-4 w-4 mr-2" />
                       Account
-                    </Link>
+                    </button>
                     
                     <button
                       onClick={handleSignOut}
