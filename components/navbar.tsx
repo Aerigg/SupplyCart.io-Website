@@ -16,11 +16,28 @@ export default function Navbar() {
     try {
       console.log('Attempting to sign out...')
       const supabase = getSupabaseClient()
-      await supabase.auth.signOut()
-      console.log('Sign out successful, forcing page reload...')
-      window.location.reload()
+      
+      // Clear all Supabase data
+      await supabase.auth.signOut({ scope: 'global' })
+      
+      // Clear all local storage
+      localStorage.clear()
+      sessionStorage.clear()
+      
+      // Clear all cookies
+      document.cookie.split(";").forEach((c) => {
+        const eqPos = c.indexOf("=")
+        const name = eqPos > -1 ? c.substr(0, eqPos) : c
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/"
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=" + window.location.hostname
+      })
+      
+      console.log('Sign out successful, forcing hard reload...')
+      window.location.href = window.location.href
     } catch (error) {
       console.error('Sign out failed:', error)
+      // Force reload even if signout failed
+      window.location.reload()
     }
   }
 
