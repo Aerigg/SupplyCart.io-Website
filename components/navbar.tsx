@@ -15,9 +15,10 @@ export default function Navbar() {
   const handleSignOut = async () => {
     try {
       console.log('Attempting to sign out...')
-      await signOut()
-      console.log('Sign out successful, redirecting...')
-      window.location.href = '/login'
+      const supabase = getSupabaseClient()
+      await supabase.auth.signOut()
+      console.log('Sign out successful, forcing page reload...')
+      window.location.reload()
     } catch (error) {
       console.error('Sign out failed:', error)
     }
