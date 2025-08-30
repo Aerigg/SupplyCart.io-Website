@@ -42,8 +42,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false)
     })
 
-    return () => subscription.unsubscribe()
-  }, [])
+    // Function to check session
+    const checkSession = async () => {
+      try {
+        const { data: { session: currentSession } } = await supabase.auth.getSession()
+        const currentSessionString = JSON.stringify(currentSession)
+        const stateSessionString = JSON.stringify(session)
+        
+        if (currentSessionString !== stateSessionString) {
+          console.log('Session changed from external source, updating...')
+          setSession(currentSession)
+          setUser(currentSession?.user ?? null)
+        }
+      } catch (error) {
+        console.error('Error checking session:', error)
+      }
+    }
+
+    // Check for session changes from other domains every 5 seconds
+    const checkSessionInterval = setInterval(checkSession, 5000)
+
+    // Also check when window gets focus (user switches back to tab)
+    const handleWindowFocus = () => {
+      checkSession()
+    }
+
+    window.addEventListener('focus', handleWindowFocus)
+    
+    return () => {
+      subscription.unsubscribe()
+      clearInterval(checkSessionInterval)
+      window.removeEventListener('focus', handleWindowFocus)
+    }
+  }, [session])
 
   const signOut = async () => {
     const supabase = getSupabaseClient()
