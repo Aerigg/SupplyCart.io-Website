@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session } from '@supabase/supabase-js'
 import { getSupabaseClient } from './supabase'
+import SessionSyncManager from './session-sync'
 
 interface AuthContextType {
   user: User | null
@@ -25,6 +26,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const supabase = getSupabaseClient()
+    
+    // Initialize session sync manager
+    SessionSyncManager.getInstance()
+    
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }: any) => {
       setSession(session)
@@ -39,6 +44,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
+      
+      // Trigger immediate sync when auth changes
+      SessionSyncManager.getInstance().syncNow()
     })
 
     return () => subscription.unsubscribe()
