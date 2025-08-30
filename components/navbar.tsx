@@ -55,6 +55,11 @@ export default function Navbar() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
+  const handleAccountClick = () => {
+    console.log('Navigating to /account')
+    window.location.href = '/account'
+  }
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,9 +68,9 @@ export default function Navbar() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
     }
   }, [])
 
@@ -131,14 +136,9 @@ export default function Navbar() {
                       </div>
                       
                       <button
-                        onClick={(e) => {
+                        onMouseDown={(e) => {
                           e.preventDefault()
-                          e.stopPropagation()
-                          console.log('Account button clicked')
-                          setDropdownOpen(false)
-                          setTimeout(() => {
-                            window.location.href = '/account'
-                          }, 0)
+                          handleAccountClick()
                         }}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
                       >
