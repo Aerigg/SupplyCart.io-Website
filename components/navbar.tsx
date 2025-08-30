@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
@@ -8,9 +9,18 @@ import { LogOut, Settings, ExternalLink } from 'lucide-react'
 
 export default function Navbar() {
   const { user, loading, signOut } = useAuth()
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false)
+  const mobileDropdownRef = useRef<HTMLDivElement>(null)
 
   const handleSignOut = async () => {
-    await signOut()
+    try {
+      console.log('Attempting to sign out...')
+      await signOut()
+      console.log('Sign out successful, redirecting...')
+      window.location.href = '/login'
+    } catch (error) {
+      console.error('Sign out failed:', error)
+    }
   }
 
   const getInitials = (user: any) => {
@@ -48,6 +58,20 @@ export default function Navbar() {
     const url = await getAppUrlWithAuth(path)
     window.open(url, '_blank', 'noopener,noreferrer')
   }
+
+  // Close mobile dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+        setMobileDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
 
   return (
@@ -136,27 +160,59 @@ export default function Navbar() {
           {/* Mobile menu */}
           <div className="md:hidden">
             {!loading && user ? (
-              <div className="flex items-center space-x-2">
-                <a
-                  href="/account"
-                  className="text-gray-700 hover:text-primary-600 transition"
-                >
-                  <Settings className="h-4 w-4" />
-                </a>
-                
+              <div className="relative" ref={mobileDropdownRef}>
                 <button
-                  onClick={() => {
-                    console.log('Mobile Abmelden clicked')
-                    handleSignOut()
-                  }}
-                  className="text-gray-700 hover:text-primary-600 transition"
+                  onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                  className="flex items-center space-x-2 focus:outline-none"
                 >
-                  <LogOut className="h-4 w-4" />
+                  <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                    {getInitials(user)}
+                  </div>
                 </button>
                 
-                <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                  {getInitials(user)}
-                </div>
+                {mobileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                    <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                      <div className="font-medium">
+                        {user.user_metadata?.first_name} {user.user_metadata?.last_name}
+                      </div>
+                      <div className="text-gray-500 truncate" title={user.email}>
+                        {user.email}
+                      </div>
+                    </div>
+                    
+                    <button
+                      onClick={() => {
+                        setMobileDropdownOpen(false)
+                        handleAppRedirect()
+                      }}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Zu SupplyCart
+                    </button>
+                    
+                    <a
+                      href="/account"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setMobileDropdownOpen(false)}
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Account
+                    </a>
+                    
+                    <button
+                      onClick={() => {
+                        console.log('Mobile Abmelden clicked')
+                        handleSignOut()
+                      }}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Abmelden
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center space-x-2">
