@@ -1,22 +1,16 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { getSupabaseClient } from '@/lib/supabase'
-import { User, LogOut, Settings, ExternalLink } from 'lucide-react'
+import { LogOut, Settings, ExternalLink } from 'lucide-react'
 
 export default function Navbar() {
   const { user, loading, signOut } = useAuth()
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
 
   const handleSignOut = async () => {
     await signOut()
-    setDropdownOpen(false)
   }
 
   const getInitials = (user: any) => {
@@ -55,36 +49,6 @@ export default function Navbar() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleAccountClick = (e: any) => {
-    e.preventDefault()
-    e.stopPropagation()
-    console.log('Navigating to /account')
-    setDropdownOpen(false)
-    
-    // Force navigation after a short delay
-    setTimeout(() => {
-      console.log('Actually navigating now')
-      window.location.href = '/account'
-    }, 100)
-  }
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement
-      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-        // Add delay to allow button clicks to complete
-        setTimeout(() => {
-          setDropdownOpen(false)
-        }, 0)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
@@ -126,52 +90,29 @@ export default function Navbar() {
                   <ExternalLink className="h-4 w-4" />
                 </button>
                 
-                <div className="relative" ref={dropdownRef}>
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center space-x-2 focus:outline-none"
+                <div className="flex items-center space-x-4">
+                  <a
+                    href="/account"
+                    className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition"
                   >
-                    <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                      {getInitials(user)}
-                    </div>
+                    <Settings className="h-4 w-4" />
+                    <span>Account</span>
+                  </a>
+                  
+                  <button
+                    onClick={() => {
+                      console.log('Desktop Abmelden clicked')
+                      handleSignOut()
+                    }}
+                    className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Abmelden</span>
                   </button>
                   
-                  {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 border border-gray-200">
-                      <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
-                        <div className="font-medium">
-                          {user.user_metadata?.first_name} {user.user_metadata?.last_name}
-                        </div>
-                        <div className="text-gray-500 truncate" title={user.email}>
-                          {user.email}
-                        </div>
-                      </div>
-                      
-                      <a
-                        href="/account"
-                        data-account-link
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left no-underline"
-                        onClick={(e) => {
-                          console.log('Account link clicked')
-                          setDropdownOpen(false)
-                        }}
-                      >
-                        <Settings className="h-4 w-4 mr-2" />
-                        Account
-                      </a>
-                      
-                      <button
-                        onClick={() => {
-                          console.log('Desktop Abmelden clicked')
-                          handleSignOut()
-                        }}
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Abmelden
-                      </button>
-                    </div>
-                  )}
+                  <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                    {getInitials(user)}
+                  </div>
                 </div>
               </>
             ) : (
@@ -192,69 +133,30 @@ export default function Navbar() {
             )}
           </div>
           
-          {/* Mobile menu button */}
+          {/* Mobile menu */}
           <div className="md:hidden">
             {!loading && user ? (
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center space-x-2 focus:outline-none"
+              <div className="flex items-center space-x-2">
+                <a
+                  href="/account"
+                  className="text-gray-700 hover:text-primary-600 transition"
                 >
-                  <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {getInitials(user)}
-                  </div>
+                  <Settings className="h-4 w-4" />
+                </a>
+                
+                <button
+                  onClick={() => {
+                    console.log('Mobile Abmelden clicked')
+                    handleSignOut()
+                  }}
+                  className="text-gray-700 hover:text-primary-600 transition"
+                >
+                  <LogOut className="h-4 w-4" />
                 </button>
                 
-                {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 border border-gray-200">
-                    <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
-                      <div className="font-medium">
-                        {user.user_metadata?.first_name} {user.user_metadata?.last_name}
-                      </div>
-                      <div className="text-gray-500 truncate" title={user.email}>
-                        {user.email}
-                      </div>
-                    </div>
-                    
-                    <button
-                      onClick={() => {
-                        setDropdownOpen(false)
-                        handleAppRedirect()
-                      }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Zu SupplyCart
-                    </button>
-                    
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        console.log('Account button clicked - mobile')
-                        setDropdownOpen(false)
-                        setTimeout(() => {
-                          window.location.href = '/account'
-                        }, 0)
-                      }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Account
-                    </button>
-                    
-                    <button
-                      onClick={() => {
-                        console.log('Mobile Abmelden clicked')
-                        handleSignOut()
-                      }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Abmelden
-                    </button>
-                  </div>
-                )}
+                <div className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                  {getInitials(user)}
+                </div>
               </div>
             ) : (
               <div className="flex items-center space-x-2">
