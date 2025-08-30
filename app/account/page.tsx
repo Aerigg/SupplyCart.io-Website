@@ -56,11 +56,6 @@ export default function Account() {
         } else {
           setIsNewUser(false)
         }
-
-        // Non-admins should go to the app
-        if (!isAdmin) {
-          window.location.href = 'https://app.supplycart.io'
-        }
       }
     } catch (error) {
       console.error('Error loading profile:', error)
