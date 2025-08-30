@@ -55,9 +55,17 @@ export default function Navbar() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleAccountClick = () => {
+  const handleAccountClick = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
     console.log('Navigating to /account')
-    window.location.href = '/account'
+    setDropdownOpen(false)
+    
+    // Force navigation after a short delay
+    setTimeout(() => {
+      console.log('Actually navigating now')
+      window.location.href = '/account'
+    }, 100)
   }
 
   // Close dropdown when clicking outside
@@ -136,10 +144,7 @@ export default function Navbar() {
                       </div>
                       
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleAccountClick()
-                        }}
+                        onClick={handleAccountClick}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
                       >
                         <Settings className="h-4 w-4 mr-2" />
