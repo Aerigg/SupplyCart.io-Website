@@ -49,7 +49,7 @@ export default function Account() {
         
         // Only company admins can see setup wizard
         const isAdmin = profileData.role === 'company_admin' || profileData.user_roles?.can_access_management
-        const setupCompleted = user?.user_metadata?.app_setup_completed || profileData.organizations?.settings?.setup_completed
+        const setupCompleted = profileData.organizations?.settings?.setup_completed === true
         
         if (isAdmin && !setupCompleted) {
           setIsNewUser(true)
@@ -123,12 +123,6 @@ export default function Account() {
                   Lassen Sie uns gemeinsam Ihre Beschaffungsprozesse einrichten. 
                   Klicken Sie auf den Button unten, um den Setup-Wizard zu starten.
                 </p>
-                <button 
-                  onClick={() => setIsNewUser(false)}
-                  className="mt-4 text-sm text-blue-600 hover:text-blue-500"
-                >
-                  Demo: Setup bereits abgeschlossen
-                </button>
               </div>
 
               {/* Setup Card */}
@@ -217,12 +211,6 @@ export default function Account() {
                 <p className="text-lg text-gray-600">
                   Ihr SupplyCart System ist eingerichtet und bereit für Sie.
                 </p>
-                <button 
-                  onClick={() => setIsNewUser(true)}
-                  className="mt-4 text-sm text-blue-600 hover:text-blue-500"
-                >
-                  Demo: Zurück zum Setup-Wizard
-                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
