@@ -118,22 +118,24 @@ export default function Navbar() {
                   </button>
                   
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 border border-gray-200">
                       <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
                         <div className="font-medium">
                           {user.user_metadata?.first_name} {user.user_metadata?.last_name}
                         </div>
-                        <div className="text-gray-500">{user.email}</div>
+                        <div className="text-gray-500 truncate" title={user.email}>
+                          {user.email}
+                        </div>
                       </div>
                       
-                      <a
+                      <Link
                         href="/account"
                         className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => setDropdownOpen(false)}
                       >
                         <Settings className="h-4 w-4 mr-2" />
                         Account
-                      </a>
+                      </Link>
                       
                       <button
                         onClick={handleSignOut}
@@ -178,12 +180,14 @@ export default function Navbar() {
                 </button>
                 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 border border-gray-200">
                     <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
                       <div className="font-medium">
                         {user.user_metadata?.first_name} {user.user_metadata?.last_name}
                       </div>
-                      <div className="text-gray-500">{user.email}</div>
+                      <div className="text-gray-500 truncate" title={user.email}>
+                        {user.email}
+                      </div>
                     </div>
                     
                     <button
@@ -197,14 +201,14 @@ export default function Navbar() {
                       Zu SupplyCart
                     </button>
                     
-                    <a
+                    <Link
                       href="/account"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setDropdownOpen(false)}
                     >
                       <Settings className="h-4 w-4 mr-2" />
                       Account
-                    </a>
+                    </Link>
                     
                     <button
                       onClick={handleSignOut}
