@@ -68,9 +68,9 @@ export default function Navbar() {
       }
     }
 
-    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener('click', handleClickOutside)
+      document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
 
@@ -136,8 +136,8 @@ export default function Navbar() {
                       </div>
                       
                       <button
-                        onMouseDown={(e) => {
-                          e.preventDefault()
+                        onClick={(e) => {
+                          e.stopPropagation()
                           handleAccountClick()
                         }}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left"
