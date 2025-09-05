@@ -14,16 +14,37 @@ export default function SetupAccountPage() {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        // Check if we have URL parameters (token_hash, type, etc.)
+        // Check for both URL search params AND fragment params (hash)
         const urlParams = new URLSearchParams(window.location.search)
-        const tokenHash = urlParams.get('token_hash')
-        const type = urlParams.get('type')
+        const hashParams = new URLSearchParams(window.location.hash.substring(1))
+        
+        const tokenHash = urlParams.get('token_hash') || hashParams.get('token_hash')
+        const type = urlParams.get('type') || hashParams.get('type') 
+        const accessToken = hashParams.get('access_token')
+        
+        // If we have access token in fragment (from invite link), process it first
+        if (accessToken && hashParams.get('type') === 'invite') {
+          console.log('Processing Supabase invite confirmation with access token...')
+          
+          // Exchange the tokens for a session
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: hashParams.get('refresh_token') || ''
+          })
+          
+          if (error) {
+            console.error('Error setting session:', error)
+            setError('Fehler beim Verarbeiten der Einladung.')
+            setLoading(false)
+            return
+          }
+          
+          console.log('Session established from invite token')
+        }
         
         // If this looks like a Supabase invite confirmation, let Supabase handle it
         if (tokenHash && type === 'invite') {
-          // Supabase will automatically handle the invite confirmation
-          // Just wait for the auth state to update
-          console.log('Processing Supabase invite confirmation...')
+          console.log('Processing Supabase invite confirmation with token hash...')
         }
         
         // Get the current session (should exist if we came from callback)
