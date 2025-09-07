@@ -23,11 +23,59 @@ export default function SetPasswordPage() {
   useEffect(() => {
     const checkUser = async () => {
       try {
+        // Check for password reset token in URL
+        const urlParams = new URLSearchParams(window.location.search)
+        const hashParams = new URLSearchParams(window.location.hash.substring(1))
+        
+        const tokenHash = urlParams.get('token_hash') || hashParams.get('token_hash')
+        const type = urlParams.get('type') || hashParams.get('type')
+        const accessToken = hashParams.get('access_token')
+        const refreshToken = hashParams.get('refresh_token')
+        
+        // Handle password reset token
+        if ((tokenHash && type === 'recovery') || (accessToken && type === 'recovery')) {
+          console.log('Processing password reset token...')
+          
+          if (accessToken && refreshToken) {
+            // Set session from tokens
+            const { data, error } = await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken
+            })
+            
+            if (error) {
+              console.error('Error setting session from reset token:', error)
+              setError('Ungültiger oder abgelaufener Link. Bitte fordern Sie einen neuen Link an.')
+              return
+            }
+            
+            console.log('Session established from reset token')
+          } else if (tokenHash) {
+            // Verify OTP token
+            const { data, error } = await supabase.auth.verifyOtp({
+              token_hash: tokenHash,
+              type: 'recovery'
+            })
+            
+            if (error) {
+              console.error('Error verifying reset token:', error)
+              setError('Ungültiger oder abgelaufener Link. Bitte fordern Sie einen neuen Link an.')
+              return
+            }
+            
+            console.log('Reset token verified')
+          }
+        }
+        
+        // Now check for session (either existing or just created from token)
         const { data: { session }, error: sessionError } = await supabase.auth.getSession()
         
         if (sessionError || !session?.user) {
           console.error('No session found')
-          router.push('/login')
+          // Only redirect to login if we didn't get an error message
+          if (!error) {
+            router.push('/login')
+          }
           return
         }
 
