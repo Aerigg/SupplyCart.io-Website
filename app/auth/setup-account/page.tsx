@@ -22,6 +22,16 @@ export default function SetupAccountPage() {
         const type = urlParams.get('type') || hashParams.get('type') 
         const accessToken = hashParams.get('access_token')
         
+        // Handle password recovery tokens
+        if (accessToken && hashParams.get('type') === 'recovery') {
+          console.log('Processing password recovery token, redirecting to set-password...')
+          
+          // Redirect to set-password page with the recovery token
+          const recoveryUrl = `/auth/set-password#access_token=${accessToken}&refresh_token=${hashParams.get('refresh_token')}&expires_in=${hashParams.get('expires_in')}&expires_at=${hashParams.get('expires_at')}&token_type=${hashParams.get('token_type')}&type=recovery`
+          router.push(recoveryUrl)
+          return
+        }
+        
         // If we have access token in fragment (from invite link), process it first
         if (accessToken && hashParams.get('type') === 'invite') {
           console.log('Processing Supabase invite confirmation with access token...')
