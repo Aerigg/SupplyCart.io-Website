@@ -95,19 +95,81 @@ export default function SetupAccountPage() {
           .eq('id', session.user.id)
           .single()
 
-        if (profileError) {
+        if (profileError && profileError.code !== 'PGRST116') {
+          // PGRST116 = "No rows found" - das ist OK, wir erstellen das Profil dann
           console.error('Profile error:', profileError)
-          setError('Fehler beim Laden des Profils.')
-          setLoading(false)
-          return
+          // Nur bei echten Fehlern abbrechen, nicht wenn einfach kein Profil existiert
+          if (profileError.code !== 'PGRST116') {
+            setError('Fehler beim Laden des Profils.')
+            setLoading(false)
+            return
+          }
         }
 
-        setProfile(profileData)
+        // CREATE PROFILE DIRECTLY - NO CROSS ORIGIN BULLSHIT!
+        if (!profileData) {
+          console.log('No profile found, creating from pending_user_data...')
+          
+          try {
+            // Get pending user data
+            const { data: pendingData, error: pendingError } = await supabase
+              .from('pending_user_data')
+              .select('*')
+              .eq('email', session.user.email)
+              .is('processed_at', null)
+              .order('created_at', { ascending: false })
+              .limit(1)
+              .single()
+            
+            if (!pendingError && pendingData) {
+              console.log('Found pending data, creating profile...', pendingData)
+              
+              // Create profile directly
+              const { error: profileError } = await supabase
+                .from('profiles')
+                .insert({
+                  id: session.user.id,
+                  full_name: pendingData.full_name,
+                  role: pendingData.role,
+                  organization_id: pendingData.organization_id,
+                  created_at: new Date().toISOString(),
+                  updated_at: new Date().toISOString()
+                })
+              
+              if (!profileError) {
+                // Mark pending data as processed
+                await supabase
+                  .from('pending_user_data')
+                  .update({ processed_at: new Date().toISOString() })
+                  .eq('id', pendingData.id)
+                
+                console.log('Profile created successfully!')
+                
+                // Set the created profile data for display
+                setProfile({
+                  ...pendingData,
+                  id: session.user.id,
+                  organizations: { name: 'Organization' } // Placeholder
+                })
+              } else {
+                console.error('Profile creation failed:', profileError)
+              }
+            } else {
+              console.error('No pending data found:', pendingError)
+            }
+          } catch (createError) {
+            console.error('Error creating profile:', createError)
+          }
+        } else {
+          setProfile(profileData)
+        }
+
         setLoading(false)
 
         // Wait a moment for UI feedback, then redirect based on role
         setTimeout(() => {
-          if (profileData.role === 'company_admin' || profileData.user_roles?.can_access_management) {
+          const currentProfile = profile || profileData
+          if (currentProfile?.role === 'company_admin' || currentProfile?.user_roles?.can_access_management) {
             // Company admin stays on supplycart.io for account management
             router.push('/account')
           } else {

@@ -153,6 +153,29 @@ export default function SetPasswordPage() {
         return
       }
 
+      // CREATE PROFILE IMMEDIATELY AFTER PASSWORD IS SET!
+      console.log('Password set successfully, now creating profile...')
+      
+      try {
+        const response = await fetch('/api/auth/create-profile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        
+        const result = await response.json()
+        
+        if (response.ok) {
+          console.log('Profile created successfully:', result)
+        } else {
+          console.error('Profile creation failed:', result)
+        }
+      } catch (profileError) {
+        console.error('Error calling create-profile API:', profileError)
+        // Don't fail the whole process, just log it
+      }
+
       setSuccess(true)
 
       // Redirect based on role after 2 seconds
