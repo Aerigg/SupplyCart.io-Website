@@ -106,59 +106,48 @@ export default function SetupAccountPage() {
           }
         }
 
-        // CREATE PROFILE DIRECTLY - NO CROSS ORIGIN BULLSHIT!
+        // CREATE PROFILE USING RPC FUNCTION - BYPASSES RLS!
         if (!profileData) {
-          console.log('No profile found, creating from pending_user_data...')
+          console.log('No profile found, calling RPC function to create profile...')
           
           try {
-            // Get pending user data
-            const { data: pendingData, error: pendingError } = await supabase
-              .from('pending_user_data')
-              .select('*')
-              .eq('email', session.user.email)
-              .is('processed_at', null)
-              .order('created_at', { ascending: false })
-              .limit(1)
-              .single()
+            // Call RPC function to create profile
+            const { data: rpcResult, error: rpcError } = await supabase
+              .rpc('create_user_profile')
             
-            if (!pendingError && pendingData) {
-              console.log('Found pending data, creating profile...', pendingData)
+            if (rpcError) {
+              console.error('RPC error:', rpcError)
+              setError('Fehler beim Erstellen des Profils.')
+            } else if (rpcResult?.success) {
+              console.log('Profile created successfully via RPC:', rpcResult)
               
-              // Create profile directly
-              const { error: profileError } = await supabase
+              // Now fetch the created profile
+              const { data: newProfile } = await supabase
                 .from('profiles')
-                .insert({
-                  id: session.user.id,
-                  full_name: pendingData.full_name,
-                  role: pendingData.role,
-                  organization_id: pendingData.organization_id,
-                  created_at: new Date().toISOString(),
-                  updated_at: new Date().toISOString()
-                })
+                .select(`
+                  *,
+                  user_roles!fk_profiles_user_role_id(
+                    name,
+                    can_access_management
+                  ),
+                  organizations(
+                    name,
+                    slug
+                  )
+                `)
+                .eq('id', session.user.id)
+                .single()
               
-              if (!profileError) {
-                // Mark pending data as processed
-                await supabase
-                  .from('pending_user_data')
-                  .update({ processed_at: new Date().toISOString() })
-                  .eq('id', pendingData.id)
-                
-                console.log('Profile created successfully!')
-                
-                // Set the created profile data for display
-                setProfile({
-                  ...pendingData,
-                  id: session.user.id,
-                  organizations: { name: 'Organization' } // Placeholder
-                })
-              } else {
-                console.error('Profile creation failed:', profileError)
+              if (newProfile) {
+                setProfile(newProfile)
               }
             } else {
-              console.error('No pending data found:', pendingError)
+              console.error('RPC failed:', rpcResult)
+              setError(rpcResult?.error || 'Fehler beim Erstellen des Profils.')
             }
           } catch (createError) {
-            console.error('Error creating profile:', createError)
+            console.error('Error calling RPC:', createError)
+            setError('Fehler beim Erstellen des Profils.')
           }
         } else {
           setProfile(profileData)
