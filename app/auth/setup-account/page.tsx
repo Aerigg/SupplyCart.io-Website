@@ -109,11 +109,14 @@ export default function SetupAccountPage() {
         // CREATE PROFILE USING RPC FUNCTION - BYPASSES RLS!
         if (!profileData) {
           console.log('No profile found, calling RPC function to create profile...')
+          console.log('Current user:', session.user.id, session.user.email)
           
           try {
             // Call RPC function to create profile
             const { data: rpcResult, error: rpcError } = await supabase
               .rpc('create_user_profile')
+            
+            console.log('RPC call result:', { rpcResult, rpcError })
             
             if (rpcError) {
               console.error('RPC error:', rpcError)
