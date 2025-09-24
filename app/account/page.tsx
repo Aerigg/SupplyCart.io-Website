@@ -270,9 +270,15 @@ export default function Account() {
                   <div className="p-6">
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Schnellaktionen</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <button className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
-                        <div className="text-blue-600 font-medium">Upgrade auf Pro Plan</div>
-                        <div className="text-sm text-gray-500 mt-1">Erweiterte Features freischalten</div>
+                      <button
+                        onClick={() => handleAppRedirect('/management/settings/subscription')}
+                        className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition w-full"
+                      >
+                        <div className="text-blue-600 font-medium flex items-center">
+                          <span>Subscription verwalten</span>
+                          <ExternalLink className="h-4 w-4 ml-2" />
+                        </div>
+                        <div className="text-sm text-gray-500 mt-1">Plan ändern, Upgrade oder Kündigung</div>
                       </button>
                       <button className="text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
                         <div className="text-gray-700 font-medium">Profil bearbeiten</div>
