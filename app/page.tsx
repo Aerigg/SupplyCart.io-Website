@@ -377,7 +377,7 @@ export default function Home() {
               </div>
               <ul className="space-y-3 mb-6 text-sm flex-grow">
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>Bis zu 3 Benutzer</li>
-                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>20 Bestellungen/Monat</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>10 Bestellungen/Monat</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Abteilung</li>
                 <li className="flex items-center"><span className="text-green-500 mr-2">✓</span>1 Lagerort</li>
                 <li className="flex items-center"><span className="text-gray-400 mr-2">✗</span>Freigabe-Workflows</li>
@@ -548,7 +548,7 @@ export default function Home() {
               </button>
               <div className="faq-answer hidden pt-4" id="faq-5">
                 <p className="text-navy-600">
-                  Ja, wirklich! Bis zu 3 Benutzer und 20 Bestellungen pro Monat sind dauerhaft kostenlos. Keine versteckten Kosten, keine Kreditkarte erforderlich. Sie zahlen nur, wenn Sie mehr Benutzer oder Bestellungen benötigen.
+                  Ja, wirklich! Bis zu 3 Benutzer und 10 Bestellungen pro Monat sind dauerhaft kostenlos. Keine versteckten Kosten, keine Kreditkarte erforderlich. Sie zahlen nur, wenn Sie mehr Benutzer oder Bestellungen benötigen.
                 </p>
               </div>
             </div>
