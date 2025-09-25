@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     // Erstelle Checkout Session mit Marketing-spezifischen URLs
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
-      payment_method_types: ['card'],
+      payment_method_types: ['card', 'sepa_debit'],
       line_items: [
         {
           price: priceId,
