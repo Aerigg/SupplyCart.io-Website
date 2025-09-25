@@ -11,7 +11,8 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || 'whsec_dummy_for_bui
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
-  const sig = headers().get('stripe-signature')!
+  const headersList = await headers()
+  const sig = headersList.get('stripe-signature')!
 
   let event: Stripe.Event
 
@@ -90,18 +91,20 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session, supabas
     .eq('stripe_checkout_session_id', session.id)
 
   // Create organization setup record for later processing
-  await supabase.from('organization_setups').insert({
-    stripe_customer_id: customerId,
-    stripe_subscription_id: subscriptionId,
-    organization_name: organizationName,
-    contact_email: contactEmail,
-    setup_status: 'payment_completed',
-    source: 'marketing_website',
-    custom_fields: session.custom_fields || [],
-    created_at: new Date().toISOString(),
-  }).catch(error => {
+  try {
+    await supabase.from('organization_setups').insert({
+      stripe_customer_id: customerId,
+      stripe_subscription_id: subscriptionId,
+      organization_name: organizationName,
+      contact_email: contactEmail,
+      setup_status: 'payment_completed',
+      source: 'marketing_website',
+      custom_fields: session.custom_fields || [],
+      created_at: new Date().toISOString(),
+    })
+  } catch (error) {
     console.error('Failed to create organization setup record:', error)
-  })
+  }
 
   console.log(`Marketing checkout completed for ${organizationName} (${contactEmail})`)
 }
@@ -110,7 +113,7 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription, supab
   const customerId = subscription.customer as string
   const subscriptionId = subscription.id
   const status = subscription.status
-  const currentPeriodEnd = new Date(subscription.current_period_end * 1000)
+  const currentPeriodEnd = new Date((subscription as any).current_period_end * 1000)
 
   // Update organization setup if it exists
   await supabase
@@ -143,7 +146,7 @@ async function handleSubscriptionCancellation(subscription: Stripe.Subscription,
 }
 
 async function handlePaymentSucceeded(invoice: Stripe.Invoice, supabase: any) {
-  const subscriptionId = invoice.subscription as string
+  const subscriptionId = (invoice as any).subscription as string
 
   if (subscriptionId) {
     await supabase
@@ -162,7 +165,7 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice, supabase: any) {
 }
 
 async function handlePaymentFailed(invoice: Stripe.Invoice, supabase: any) {
-  const subscriptionId = invoice.subscription as string
+  const subscriptionId = (invoice as any).subscription as string
 
   if (subscriptionId) {
     await supabase
