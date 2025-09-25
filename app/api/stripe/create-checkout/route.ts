@@ -95,17 +95,19 @@ export async function POST(req: NextRequest) {
     })
 
     // Speichere Marketing Lead in Supabase für Follow-up
-    await supabase.from('marketing_leads').insert({
-      email: email,
-      organization_name: organizationName,
-      stripe_customer_id: customer.id,
-      stripe_checkout_session_id: session.id,
-      status: 'checkout_created',
-      created_at: new Date().toISOString(),
-    }).select().single().catch(error => {
+    try {
+      await supabase.from('marketing_leads').insert({
+        email: email,
+        organization_name: organizationName,
+        stripe_customer_id: customer.id,
+        stripe_checkout_session_id: session.id,
+        status: 'checkout_created',
+        created_at: new Date().toISOString(),
+      }).select().single()
+    } catch (error) {
       console.warn('Could not save marketing lead:', error)
       // Don't fail the checkout if lead tracking fails
-    })
+    }
 
     return NextResponse.json({
       sessionId: session.id,
