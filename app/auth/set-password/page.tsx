@@ -188,8 +188,8 @@ export default function SetPasswordPage() {
             if (updatedProfile?.role === 'company_admin' || updatedProfile?.user_roles?.can_access_management) {
               router.push('/account')
             } else {
-              // For regular users, redirect to app with proper authentication
-              window.location.href = 'https://app.supplycart.io/login'
+              // For regular users, redirect to app main page (shows login if needed)
+              window.location.href = 'https://app.supplycart.io'
             }
           }, 1500)
         } catch (err) {
@@ -197,7 +197,7 @@ export default function SetPasswordPage() {
           // Still redirect even if profile fetch fails
           setSuccess(true)
           setTimeout(() => {
-            window.location.href = 'https://app.supplycart.io/login'
+            window.location.href = 'https://app.supplycart.io'
           }, 1500)
         }
       }, 1000)
