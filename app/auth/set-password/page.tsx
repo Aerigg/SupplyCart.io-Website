@@ -102,7 +102,7 @@ export default function SetPasswordPage() {
           setProfile(profileData)
         }
 
-        // Check if password is already set
+        // Check if password is already set (only redirect if needs_password_setup is explicitly false)
         if (session.user.user_metadata?.needs_password_setup === false) {
           // Password already set, redirect based on role
           if (profileData?.role === 'company_admin' || profileData?.user_roles?.can_access_management) {
@@ -111,6 +111,7 @@ export default function SetPasswordPage() {
             window.location.href = 'https://app.supplycart.io'
           }
         }
+        // If needs_password_setup is true or undefined, user needs to set password
 
       } catch (err) {
         console.error('Error checking user:', err)

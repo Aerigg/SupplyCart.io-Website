@@ -3,19 +3,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getSupabaseClient } from '@/lib/supabase'
-import { Eye, EyeOff } from 'lucide-react'
 
 export default function Register() {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    confirmPassword: '',
     firstName: '',
     lastName: '',
     company: ''
   })
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -25,31 +20,23 @@ export default function Register() {
     setError('')
     setLoading(true)
 
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwörter stimmen nicht überein')
-      setLoading(false)
-      return
-    }
-
-    if (formData.password.length < 6) {
-      setError('Passwort muss mindestens 6 Zeichen lang sein')
-      setLoading(false)
-      return
-    }
-
     try {
       const supabase = getSupabaseClient()
+      // Generate a temporary random password - user will set their own after email verification
+      const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8) + 'Aa1!'
+
       const { data, error } = await supabase.auth.signUp({
         email: formData.email,
-        password: formData.password,
+        password: tempPassword,
         options: {
           data: {
             first_name: formData.firstName,
             last_name: formData.lastName,
             company: formData.company,
-            subscription_plan: 'free'
+            subscription_plan: 'free',
+            needs_password_setup: true
           },
-          emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/auth/setup-account`
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/auth/set-password`
         }
       })
 
@@ -154,61 +141,6 @@ export default function Register() {
               />
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Passwort
-              </label>
-              <div className="mt-1 relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 pr-10 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-gray-400" />
-                  ) : (
-                    <Eye className="h-4 w-4 text-gray-400" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Passwort bestätigen
-              </label>
-              <div className="mt-1 relative">
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 pr-10 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4 text-gray-400" />
-                  ) : (
-                    <Eye className="h-4 w-4 text-gray-400" />
-                  )}
-                </button>
-              </div>
-            </div>
 
             <div>
               <button

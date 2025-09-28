@@ -12,9 +12,9 @@ export default function RegisterSuccess() {
           </h2>
           
           <p className="text-gray-600 mb-6">
-            Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte klicken Sie auf den Link in der E-Mail, um Ihr Konto zu aktivieren.
+            Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte klicken Sie auf den Link in der E-Mail, um Ihr Konto zu aktivieren und Ihr Passwort festzulegen.
           </p>
-          
+
           <div className="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
             <p className="text-sm text-blue-800">
               <strong>Nächste Schritte:</strong>
@@ -23,7 +23,9 @@ export default function RegisterSuccess() {
               <br />
               2. Klicken Sie auf den Bestätigungslink
               <br />
-              3. Melden Sie sich mit Ihren Zugangsdaten an
+              3. Legen Sie Ihr persönliches Passwort fest
+              <br />
+              4. Melden Sie sich mit Ihren Zugangsdaten an
             </p>
           </div>
           
