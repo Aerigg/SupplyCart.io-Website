@@ -154,39 +154,53 @@ export default function SetPasswordPage() {
         return
       }
 
-      // CREATE PROFILE IMMEDIATELY AFTER PASSWORD IS SET!
-      console.log('Password set successfully, now creating profile...')
-      
-      try {
-        const response = await fetch('/api/auth/create-profile', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        
-        const result = await response.json()
-        
-        if (response.ok) {
-          console.log('Profile created successfully:', result)
-        } else {
-          console.error('Profile creation failed:', result)
-        }
-      } catch (profileError) {
-        console.error('Error calling create-profile API:', profileError)
-        // Don't fail the whole process, just log it
-      }
+      // Profile will be created by database trigger automatically
+      console.log('Password set successfully!')
 
-      setSuccess(true)
+      // Wait a moment for the trigger to create the profile, then fetch it
+      setTimeout(async () => {
+        try {
+          // Refresh the profile data
+          const { data: updatedProfile } = await supabase
+            .from('profiles')
+            .select(`
+              *,
+              user_roles!fk_profiles_user_role_id(
+                name,
+                can_access_management
+              ),
+              organizations(
+                name,
+                slug
+              )
+            `)
+            .eq('id', user.id)
+            .single()
 
-      // Redirect based on role after 2 seconds
-      setTimeout(() => {
-        if (profile?.role === 'company_admin' || profile?.user_roles?.can_access_management) {
-          router.push('/account')
-        } else {
-          window.location.href = 'https://app.supplycart.io'
+          if (updatedProfile) {
+            setProfile(updatedProfile)
+          }
+
+          setSuccess(true)
+
+          // Redirect based on role after showing success
+          setTimeout(() => {
+            if (updatedProfile?.role === 'company_admin' || updatedProfile?.user_roles?.can_access_management) {
+              router.push('/account')
+            } else {
+              // For regular users, redirect to app with proper authentication
+              window.location.href = 'https://app.supplycart.io/login'
+            }
+          }, 1500)
+        } catch (err) {
+          console.error('Error fetching updated profile:', err)
+          // Still redirect even if profile fetch fails
+          setSuccess(true)
+          setTimeout(() => {
+            window.location.href = 'https://app.supplycart.io/login'
+          }, 1500)
         }
-      }, 2000)
+      }, 1000)
 
     } catch (err) {
       console.error('Unexpected error:', err)
